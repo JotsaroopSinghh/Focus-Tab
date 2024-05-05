@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Chrome extension",
+  "version": "1.0.0",
+  "description": "The Better New Tab",
+  "permissions": ["activeTab", "geolocation"],
+
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  }
+}
