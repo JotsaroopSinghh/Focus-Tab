@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      body {
+        background: #fff;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      #clock {
+        font-size: 50px;
+        font-family: sans-serif;
+        border: solid 5px #000;
+        border-radius: 50%;
+        padding: 120px 0px;
+        background-color: rgb(127, 255, 232);
+        text-align: center;
+      }
+
+      .date-container {
+        background-color: rgb(127, 255, 232);
+        margin-top: -100px;
+        position: relative;
+        font-size: 40px;
+        border: solid 5px #000a1f;
+        border-radius: 50%;
+        padding: 120px 45px;
+        border-radius: 50%;
+      }
+    </style>
+    <div class="container">
+      <div class="circle"></div>
+      <!--TIME-->
+      <div id="container">
+        <p id="clock"></p>
+      </div>
+      <!--DATE-->
+      <div class="date-container">
+        <div id="date-info">
+          <p>Loading...</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      //TIME
+      function displayTime() {
+        var d = new Date();
+        var hour = d.getHours();
+        var min = d.getMinutes();
+        var sec = d.getSeconds();
+        var amOrPm = "AM";
+        if (hour >= 12) {
+          amOrPm = "PM";
+        }
+        if (hour > 12) {
+          hour = hour - 12;
+        }
+        if (hour < 10) hour = "0" + hour;
+        if (min < 10) min = "0" + min;
+        // if (sec < 10) sec = "0" + sec;
+        document.getElementById("clock").innerHTML =
+          hour + ":" + min + " " + amOrPm;
+      }
+      setInterval(displayTime, 1000);
+      //Date
+      function updateDate() {
+        const dateInfoDiv = document.getElementById("date-info");
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = now.toLocaleString("default", { month: "long" });
+        const date = now.getDate();
+        const day = now.toLocaleString("default", { weekday: "long" });
+
+        dateInfoDiv.innerHTML = `
+                <p>${date} ${month} ${year}</p>
+            `;
+      }
+
+      // Update the date every second
+      setInterval(updateDate, 1000);
+
+      // Initial update
+      updateDate();
+    </script>
+  </body>
+</html>
