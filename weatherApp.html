@@ -1,0 +1,190 @@
+<!-- <!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="weather-container">
+      <h2>Weather App</h2>
+      <input type="text" id="city" placeholder="Enter city" />
+      <button onclick="getWeather()">Search</button>
+      <div class="weather-report">
+        <img id="weather-icon" alt="Weather Icon" />
+
+        <div id="temp-div"></div>
+
+        <div id="weather-info"></div>
+
+      </div>
+    <script src="./script.js"></script>
+  </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="weather-container">
+      <h1>Real-time Weather</h1>
+      <div id="weather-info">
+        <p>Loading...</p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>  -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #87ceeb;
+      }
+
+      .weather-container {
+        text-align: center;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      .search-container {
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .search-container.minimized {
+        height: 0;
+        overflow: hidden;
+        margin-bottom: 0;
+      }
+
+      #city-input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
+
+      #search-button {
+        padding: 10px 20px;
+        border: none;
+        background: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #search-button:hover {
+        background: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="weather-container">
+      <h1>Real-time Weather</h1>
+      <div class="search-container" id="search-container">
+        <input type="text" id="city-input" placeholder="Enter city name" />
+        <button id="search-button">Search</button>
+      </div>
+      <div id="weather-info">
+        <p>Loading...</p>
+      </div>
+    </div>
+    <script>
+      const apiKey = "5c4f40a3458f8908bee1d717b62fb8cf"; // Replace with your OpenWeatherMap API key
+      let city = localStorage.getItem("lastCity") || "London"; // Default city or last searched city
+
+      const weatherInfoDiv = document.getElementById("weather-info");
+      const cityInput = document.getElementById("city-input");
+      const searchButton = document.getElementById("search-button");
+      const searchContainer = document.getElementById("search-container");
+
+      async function fetchWeather() {
+        try {
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const weatherData = await response.json();
+          displayWeather(weatherData);
+        } catch (error) {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+          weatherInfoDiv.innerHTML =
+            "<p>Error fetching weather data. Please try again.</p>";
+        }
+      }
+
+      function displayWeather(data) {
+        const { name, main, weather } = data;
+        weatherInfoDiv.innerHTML = `
+                <h2>${name}</h2>
+                <p>Temperature: ${main.temp} °C</p>
+                <p>Humidity: ${main.humidity} %</p>
+                <p>Condition: ${weather[0].description}</p>
+            `;
+      }
+
+      // Fetch weather data every second
+      setInterval(fetchWeather, 1000);
+
+      // Initial fetch
+      fetchWeather();
+
+      // Update city and fetch weather on search button click
+      searchButton.addEventListener("click", () => {
+        city = cityInput.value.trim();
+        if (city) {
+          localStorage.setItem("lastCity", city); // Store the last searched city
+          fetchWeather();
+          minimizeSearchBar();
+        }
+      });
+
+      // Update city and fetch weather on Enter key press
+      cityInput.addEventListener("keyup", (event) => {
+        if (event.key === "Enter") {
+          city = cityInput.value.trim();
+          if (city) {
+            localStorage.setItem("lastCity", city); // Store the last searched city
+            fetchWeather();
+            minimizeSearchBar();
+          }
+        }
+      });
+
+      // Minimize the search bar
+      function minimizeSearchBar() {
+        searchContainer.classList.add("minimized");
+      }
+    </script>
+  </body>
+</html>
