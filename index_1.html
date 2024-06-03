@@ -14,7 +14,11 @@
         font-family: sans-serif;
       }
       body {
-        background: #fff;
+        background: rgb(127, 255, 232);
+      }
+      .main_container {
+        display: flex;
+        margin-top: 50px;
       }
 
       .container {
@@ -26,7 +30,9 @@
       #clock {
         font-size: 50px;
         font-family: sans-serif;
-        border: solid 5px #000;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
+
+        border: solid 5px transparent;
         border-radius: 50%;
         padding: 120px 0px;
         background-color: rgb(127, 255, 232);
@@ -34,30 +40,111 @@
       }
 
       .date-container {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
+
         background-color: rgb(127, 255, 232);
         margin-top: -100px;
         position: relative;
         font-size: 40px;
-        border: solid 5px #000a1f;
+        border: solid 5px transparent;
         border-radius: 50%;
         padding: 120px 45px;
         border-radius: 50%;
       }
+      .weather-widget {
+        background: rgb(127, 255, 232);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
+        width: 300px;
+        text-align: center;
+        margin-left: 100px;
+      }
+      .weather-widget input,
+      .weather-widget button {
+        padding: 10px;
+        margin: 10px 0;
+        width: calc(100% - 22px);
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+      .weather-widget button {
+        background: #000;
+        color: white;
+        cursor: pointer;
+      }
+      .weather-widget button:hover {
+        background: #000;
+      }
+      .weather-info {
+        margin-top: 20px;
+      }
+      .weather-info .city {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .weather-info .city h3 {
+        margin: 0;
+      }
+      .weather-info .city span {
+        margin-left: 10px;
+        cursor: pointer;
+        color: #888;
+      }
+      .weather-info .city span:hover {
+        color: #555;
+      }
+      .weather-emoji {
+        font-size: 2.5rem;
+      }
+      .temperature {
+        font-size: 50px;
+        color: #000;
+        margin: 5px 0;
+      }
+      .details {
+        font-size: 17px;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+      }
+      .details div {
+        text-align: center;
+      }
+      .details div p {
+        margin: 5px 0;
+      }
+      .details div .icon {
+        font-size: 1.5rem;
+      }
     </style>
-    <div class="container">
-      <div class="circle"></div>
-      <!--TIME-->
-      <div id="container">
-        <p id="clock"></p>
+
+    <div class="main_container">
+      <div class="weather-widget">
+        <h2 id="widgetTitle">Weather</h2>
+        <div class="location-input">
+          <input type="text" id="city" placeholder="Enter city" />
+          <button id="getWeather">Get Weather</button>
+          <button id="autoDetect">Auto Detect Location</button>
+        </div>
+        <div class="weather-info" id="weatherInfo"></div>
       </div>
-      <!--DATE-->
-      <div class="date-container">
-        <div id="date-info">
-          <p>Loading...</p>
+
+      <div class="container">
+        <!--TIME-->
+        <div id="container">
+          <p id="clock"></p>
+        </div>
+        <!--DATE-->
+        <div class="date-container">
+          <div id="date-info">
+            <p>Loading...</p>
+          </div>
         </div>
       </div>
     </div>
-
     <script>
       //TIME
       function displayTime() {
@@ -99,6 +186,123 @@
 
       // Initial update
       updateDate();
+
+      //WEATHER
+
+      const apiKey = "5c4f40a3458f8908bee1d717b62fb8cf"; // Replace with your OpenWeatherMap API key
+      let intervalId;
+
+      document.getElementById("getWeather").addEventListener("click", () => {
+        const city = document.getElementById("city").value;
+        if (city) {
+          fetchWeather(city);
+          localStorage.setItem("city", city);
+          clearInterval(intervalId);
+          intervalId = setInterval(() => fetchWeather(city), 600000); // Update every 10 minutes
+        }
+      });
+
+      document.getElementById("autoDetect").addEventListener("click", () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            fetchWeatherByCoords(lat, lon);
+            clearInterval(intervalId);
+            intervalId = setInterval(
+              () => fetchWeatherByCoords(lat, lon),
+              600000
+            ); // Update every 10 minutes
+          });
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const storedCity = localStorage.getItem("city");
+        if (storedCity) {
+          fetchWeather(storedCity);
+          intervalId = setInterval(() => fetchWeather(storedCity), 600000); // Update every 10 minutes
+        }
+      });
+
+      function fetchWeather(city) {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+        )
+          .then((response) => response.json())
+          .then((data) => displayWeather(data))
+          .catch((error) => alert("Error fetching weather data: " + error));
+      }
+
+      function fetchWeatherByCoords(lat, lon) {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            displayWeather(data);
+            localStorage.setItem("city", data.name);
+          })
+          .catch((error) => alert("Error fetching weather data: " + error));
+      }
+
+      function displayWeather(data) {
+        if (data.cod === 200) {
+          const weatherInfo = document.getElementById("weatherInfo");
+          const widgetTitle = document.getElementById("widgetTitle");
+          widgetTitle.style.display = "none";
+
+          let weatherEmoji;
+          const main = data.weather[0].main.toLowerCase();
+          if (main.includes("clear")) {
+            weatherEmoji = "☀️";
+          } else if (main.includes("clouds")) {
+            weatherEmoji = "☁️";
+          } else if (main.includes("rain")) {
+            weatherEmoji = "🌧️";
+          } else if (main.includes("snow")) {
+            weatherEmoji = "❄️";
+          } else {
+            weatherEmoji = "🌈";
+          }
+
+          weatherInfo.innerHTML = `
+                    <div class="city">
+                        <h3>${data.name}</h3><span id="editLocation">✏️</span>
+                    </div>
+                    <div class="weather-emoji">${weatherEmoji}</div>
+                    <div class="temperature">${data.main.temp}°C</div>
+                    <div class="details">
+                        <div>
+                            <div class="icon">🌡️</div>
+                            <p> ${data.main.feels_like}°C</p>
+                        </div>
+                        <div>
+                            <div class="icon">💧</div>
+                            <p> ${data.main.humidity}%</p>
+                        </div>
+                        <div>
+                            <div class="icon">🌬️</div>
+                            <p> ${data.wind.speed} m/s</p>
+                        </div>
+                    </div>
+                `;
+          document.querySelector(".location-input").style.display = "none";
+          document
+            .getElementById("editLocation")
+            .addEventListener("click", () => {
+              document.querySelector(".location-input").style.display = "block";
+              document.getElementById("widgetTitle").style.display = "block";
+              weatherInfo.innerHTML = "";
+              localStorage.removeItem("city");
+              clearInterval(intervalId);
+            });
+        } else {
+          alert("City not found");
+        }
+      }
     </script>
   </body>
 </html>

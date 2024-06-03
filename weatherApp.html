@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App</title>
+    <title>Weather Widget</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -12,134 +12,201 @@
         align-items: center;
         height: 100vh;
         margin: 0;
-        background: #87ceeb;
+        background: #e0f7fa;
       }
-
-      .weather-container {
-        text-align: center;
-        background: white;
+      .weather-widget {
+        background: #ffffff;
         padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
       }
-
-      h1 {
-        margin-bottom: 20px;
-      }
-
-      .search-container {
-        margin-bottom: 20px;
-        transition: all 0.3s ease;
-      }
-
-      .search-container.minimized {
-        height: 0;
-        overflow: hidden;
-        margin-bottom: 0;
-      }
-
-      #city-input {
+      .weather-widget input,
+      .weather-widget button {
         padding: 10px;
+        margin: 10px 0;
+        width: calc(100% - 22px);
         border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-right: 10px;
+        border-radius: 4px;
       }
-
-      #search-button {
-        padding: 10px 20px;
-        border: none;
+      .weather-widget button {
         background: #007bff;
         color: white;
-        border-radius: 5px;
         cursor: pointer;
       }
-
-      #search-button:hover {
+      .weather-widget button:hover {
         background: #0056b3;
+      }
+      .weather-info {
+        margin-top: 20px;
+      }
+      .weather-info .city {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .weather-info .city h3 {
+        margin: 0;
+      }
+      .weather-info .city span {
+        margin-left: 10px;
+        cursor: pointer;
+        color: #888;
+      }
+      .weather-info .city span:hover {
+        color: #555;
+      }
+      .weather-emoji {
+        font-size: 3rem;
+      }
+      .temperature {
+        font-size: 4rem;
+        color: #007bff;
+        margin: 20px 0;
+      }
+      .details {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+      .details div {
+        text-align: center;
+      }
+      .details div p {
+        margin: 5px 0;
+      }
+      .details div .icon {
+        font-size: 1.5rem;
       }
     </style>
   </head>
   <body>
-    <div class="weather-container">
-      <h1>Real-time Weather</h1>
-      <div class="search-container" id="search-container">
-        <input type="text" id="city-input" placeholder="Enter city name" />
-        <button id="search-button">Search</button>
+    <div class="weather-widget">
+      <h2 id="widgetTitle">Weather Widget</h2>
+      <div class="location-input">
+        <input type="text" id="city" placeholder="Enter city" />
+        <button id="getWeather">Get Weather</button>
+        <button id="autoDetect">Auto Detect Location</button>
       </div>
-      <div id="weather-info">
-        <p>Loading...</p>
-      </div>
+      <div class="weather-info" id="weatherInfo"></div>
     </div>
+
     <script>
       const apiKey = "5c4f40a3458f8908bee1d717b62fb8cf"; // Replace with your OpenWeatherMap API key
-      let city = localStorage.getItem("lastCity") || "London"; // Default city or last searched city
+      let intervalId;
 
-      const weatherInfoDiv = document.getElementById("weather-info");
-      const cityInput = document.getElementById("city-input");
-      const searchButton = document.getElementById("search-button");
-      const searchContainer = document.getElementById("search-container");
-
-      async function fetchWeather() {
-        try {
-          const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-          );
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          const weatherData = await response.json();
-          displayWeather(weatherData);
-        } catch (error) {
-          console.error(
-            "There has been a problem with your fetch operation:",
-            error
-          );
-          weatherInfoDiv.innerHTML =
-            "<p>Error fetching weather data. Please try again.</p>";
+      document.getElementById("getWeather").addEventListener("click", () => {
+        const city = document.getElementById("city").value;
+        if (city) {
+          fetchWeather(city);
+          localStorage.setItem("city", city);
+          clearInterval(intervalId);
+          intervalId = setInterval(() => fetchWeather(city), 600000); // Update every 10 minutes
         }
+      });
+
+      document.getElementById("autoDetect").addEventListener("click", () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            fetchWeatherByCoords(lat, lon);
+            clearInterval(intervalId);
+            intervalId = setInterval(
+              () => fetchWeatherByCoords(lat, lon),
+              600000
+            ); // Update every 10 minutes
+          });
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const storedCity = localStorage.getItem("city");
+        if (storedCity) {
+          fetchWeather(storedCity);
+          intervalId = setInterval(() => fetchWeather(storedCity), 600000); // Update every 10 minutes
+        }
+      });
+
+      function fetchWeather(city) {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+        )
+          .then((response) => response.json())
+          .then((data) => displayWeather(data))
+          .catch((error) => alert("Error fetching weather data: " + error));
+      }
+
+      function fetchWeatherByCoords(lat, lon) {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            displayWeather(data);
+            localStorage.setItem("city", data.name);
+          })
+          .catch((error) => alert("Error fetching weather data: " + error));
       }
 
       function displayWeather(data) {
-        const { name, main, weather } = data;
-        weatherInfoDiv.innerHTML = `
-                <h2>${name}</h2>
-                <p>Temperature: ${main.temp} °C</p>
-                <p>Humidity: ${main.humidity} %</p>
-                <p>Condition: ${weather[0].description}</p>
-            `;
-      }
+        if (data.cod === 200) {
+          const weatherInfo = document.getElementById("weatherInfo");
+          const widgetTitle = document.getElementById("widgetTitle");
+          widgetTitle.style.display = "none";
 
-      // Fetch weather data every second
-      setInterval(fetchWeather, 1000);
-
-      // Initial fetch
-      fetchWeather();
-
-      // Update city and fetch weather on search button click
-      searchButton.addEventListener("click", () => {
-        city = cityInput.value.trim();
-        if (city) {
-          localStorage.setItem("lastCity", city); // Store the last searched city
-          fetchWeather();
-          minimizeSearchBar();
-        }
-      });
-
-      // Update city and fetch weather on Enter key press
-      cityInput.addEventListener("keyup", (event) => {
-        if (event.key === "Enter") {
-          city = cityInput.value.trim();
-          if (city) {
-            localStorage.setItem("lastCity", city); // Store the last searched city
-            fetchWeather();
-            minimizeSearchBar();
+          let weatherEmoji;
+          const main = data.weather[0].main.toLowerCase();
+          if (main.includes("clear")) {
+            weatherEmoji = "☀️";
+          } else if (main.includes("clouds")) {
+            weatherEmoji = "☁️";
+          } else if (main.includes("rain")) {
+            weatherEmoji = "🌧️";
+          } else if (main.includes("snow")) {
+            weatherEmoji = "❄️";
+          } else {
+            weatherEmoji = "🌈";
           }
-        }
-      });
 
-      // Minimize the search bar
-      function minimizeSearchBar() {
-        searchContainer.classList.add("minimized");
+          weatherInfo.innerHTML = `
+                    <div class="city">
+                        <h3>${data.name}</h3><span id="editLocation">✏️</span>
+                    </div>
+                    <div class="weather-emoji">${weatherEmoji}</div>
+                    <div class="temperature">${data.main.temp}°C</div>
+                    <div class="details">
+                        <div>
+                            <div class="icon">🌡️</div>
+                            <p>Feels like: ${data.main.feels_like}°C</p>
+                        </div>
+                        <div>
+                            <div class="icon">💧</div>
+                            <p>Humidity: ${data.main.humidity}%</p>
+                        </div>
+                        <div>
+                            <div class="icon">🌬️</div>
+                            <p>Wind: ${data.wind.speed} m/s</p>
+                        </div>
+                    </div>
+                `;
+          document.querySelector(".location-input").style.display = "none";
+          document
+            .getElementById("editLocation")
+            .addEventListener("click", () => {
+              document.querySelector(".location-input").style.display = "block";
+              document.getElementById("widgetTitle").style.display = "block";
+              weatherInfo.innerHTML = "";
+              localStorage.removeItem("city");
+              clearInterval(intervalId);
+            });
+        } else {
+          alert("City not found");
+        }
       }
     </script>
   </body>
