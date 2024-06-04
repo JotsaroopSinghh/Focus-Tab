@@ -58,7 +58,8 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
         width: 300px;
         text-align: center;
-        margin-left: 100px;
+        margin-left: 140px;
+        margin-top: 40px;
       }
       .weather-widget input,
       .weather-widget button {
@@ -67,14 +68,15 @@
         width: calc(100% - 22px);
         border: 1px solid transparent;
         border-radius: 4px;
+        outline: none;
       }
       .weather-widget button {
-        background: #000;
+        background: #00021c;
         color: white;
         cursor: pointer;
       }
       .weather-widget button:hover {
-        background: #000;
+        background: #00021c;
       }
       .weather-info {
         margin-top: 20px;
@@ -119,17 +121,91 @@
       .details div .icon {
         font-size: 1.5rem;
       }
+      .left_side {
+        display: flex;
+        flex-direction: column;
+      }
+      #todo-list {
+        background: rgb(127, 255, 232);
+        padding: 50px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
+        width: 300px;
+
+        margin-left: 140px;
+        margin-top: 30px;
+      }
+      #todo-list ul {
+        display: block;
+        list-style-type: none;
+        padding: 0;
+      }
+      #todo-list li {
+        background-color: #fff;
+        border: none;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 13px;
+      }
+      #todo-list li.completed {
+        text-decoration: none;
+        color: #888;
+      }
+      #todo-list input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        border: none;
+        outline: none;
+      }
+      #todo-list button {
+        background-color: #000;
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.292); */
+        color: #fff;
+        border: none;
+
+        cursor: pointer;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      #tasks button {
+        background-color: transparent;
+        box-shadow: none;
+        float: right;
+        padding: 0;
+      }
+      .todo-head {
+        text-align: center;
+        font-size: 30px;
+        padding-bottom: 20px;
+      }
+      .input_text {
+        display: flex;
+      }
     </style>
 
     <div class="main_container">
-      <div class="weather-widget">
-        <h2 id="widgetTitle">Weather</h2>
-        <div class="location-input">
-          <input type="text" id="city" placeholder="Enter city" />
-          <button id="getWeather">Get Weather</button>
-          <button id="autoDetect">Auto Detect Location</button>
+      <div class="left_side">
+        <div class="weather-widget">
+          <h2 id="widgetTitle">Weather</h2>
+          <div class="location-input">
+            <input type="text" id="city" placeholder="Enter city" />
+            <button id="getWeather">Get Weather</button>
+            <button id="autoDetect">Auto Detect Location</button>
+          </div>
+          <div class="weather-info" id="weatherInfo"></div>
         </div>
-        <div class="weather-info" id="weatherInfo"></div>
+        <div id="todo-list">
+          <h2 class="todo-head">TO-DO LIST</h2>
+          <div class="input_text">
+            <input type="text" id="taskInput" placeholder="Enter task..." />
+            <button onclick="addTask()">Add</button>
+          </div>
+          <ul id="tasks"></ul>
+        </div>
       </div>
 
       <div class="container">
@@ -302,6 +378,51 @@
         } else {
           alert("City not found");
         }
+      }
+      let tasks = localStorage.getItem("tasks")
+        ? JSON.parse(localStorage.getItem("tasks"))
+        : [];
+
+      // Display the saved tasks
+      tasks.forEach((task) => {
+        addTaskToDOM(task);
+      });
+
+      // Function to add a task
+      function addTask() {
+        let taskInput = document.getElementById("taskInput");
+        let taskText = taskInput.value.trim();
+        if (taskText !== "") {
+          let task = { text: taskText, completed: false };
+          tasks.push(task);
+          localStorage.setItem("tasks", JSON.stringify(tasks));
+          addTaskToDOM(task);
+          taskInput.value = ""; // Clear the input field
+        }
+      }
+
+      // Function to add a task to the DOM
+      function addTaskToDOM(task) {
+        let tasksList = document.getElementById("tasks");
+        let taskItem = document.createElement("li");
+        taskItem.textContent = task.text;
+        if (task.completed) {
+          taskItem.classList.add("completed");
+        }
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "❌";
+        deleteButton.onclick = function () {
+          removeTask(task);
+          tasksList.removeChild(taskItem);
+        };
+        taskItem.appendChild(deleteButton);
+        tasksList.appendChild(taskItem);
+      }
+
+      // Function to remove a task
+      function removeTask(taskToRemove) {
+        tasks = tasks.filter((task) => task !== taskToRemove);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
       }
     </script>
   </body>
