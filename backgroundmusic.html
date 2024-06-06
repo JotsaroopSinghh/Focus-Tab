@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background Audio Player</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f4f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background-color: #007bff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        color: white;
+        width: 300px;
+      }
+
+      .cover-art {
+        background-color: #0056b3;
+        width: 100%;
+        height: 200px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+      }
+
+      .controls button {
+        background-color: white;
+        color: #007bff;
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+
+      .controls button:hover {
+        background-color: #e6f7ff;
+      }
+
+      .track-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .track-list li {
+        cursor: pointer;
+        padding: 10px;
+        background-color: #0056b3;
+        border-radius: 6px;
+        margin-bottom: 10px;
+      }
+
+      .track-list li:hover {
+        background-color: #004080;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="cover-art" id="cover-art"></div>
+      <div class="controls">
+        <button id="play">▶</button>
+        <button id="pause">⏸</button>
+      </div>
+      <ul class="track-list">
+        <li data-audio="audio1.mp3">Track 1</li>
+        <li data-audio="audio2.mp3">Track 2</li>
+        <li data-audio="audio3.mp3">Track 3</li>
+      </ul>
+    </div>
+
+    <audio id="audio" loop></audio>
+
+    <script>
+      const playButton = document.getElementById("play");
+      const pauseButton = document.getElementById("pause");
+      const audioElement = document.getElementById("audio");
+      const trackList = document.querySelectorAll(".track-list li");
+
+      let currentAudio = null;
+
+      playButton.addEventListener("click", () => {
+        if (currentAudio) {
+          audioElement.play();
+        }
+      });
+
+      pauseButton.addEventListener("click", () => {
+        audioElement.pause();
+      });
+
+      trackList.forEach((track) => {
+        track.addEventListener("click", () => {
+          const audioSrc = track.getAttribute("data-audio");
+          audioElement.src = audioSrc;
+          currentAudio = audioSrc;
+          audioElement.play();
+        });
+      });
+    </script>
+  </body>
+</html>
