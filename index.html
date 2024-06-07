@@ -3,8 +3,654 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Tab</title>
+    <title>Document</title>
   </head>
   <body>
-   
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      .main_container {
+        display: flex;
+        margin-top: 50px;
+      }
+      #background-container {
+        margin-top: -50px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+        background-position: center;
+        background-image: url("default-image.jpg"); /* Default background image */
+        position: absolute;
+      }
+
+      .context-menu {
+        color: #000;
+        font-family: sans-serif;
+        position: absolute;
+        background-color: #fff;
+        border: 3px solid #fff;
+        list-style: none;
+        padding: 10px;
+        margin: 0;
+        display: none;
+        z-index: 1000;
+      }
+
+      .context-menu li {
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      .context-menu li:hover {
+        background-color: #fff;
+      }
+
+      .thumbnail-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+      }
+
+      .thumbnail {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        cursor: pointer;
+        padding: 3px;
+      }
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      #clock {
+        font-size: 50px;
+        font-family: sans-serif;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
+        color: #fff;
+        border: solid 5px transparent;
+        border-radius: 50%;
+        padding: 120px 0px;
+        background-color: rgba(0, 0, 0, 0.418);
+        text-align: center;
+      }
+
+      .date-container {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.418);
+        margin-top: -100px;
+        position: relative;
+        font-size: 40px;
+        border: solid 5px transparent;
+        border-radius: 50%;
+        padding: 120px 45px;
+        border-radius: 50%;
+      }
+      .weather-widget {
+        background: rgba(0, 0, 0, 0.418);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
+        width: 300px;
+        text-align: center;
+        margin-left: 140px;
+        margin-top: 40px;
+      }
+      .weather-widget input,
+      .weather-widget button {
+        padding: 10px;
+        margin: 10px 0;
+        width: calc(100% - 22px);
+        border: 1px solid transparent;
+        border-radius: 4px;
+        outline: none;
+      }
+      .weather-widget button {
+        background: #00021c;
+        color: white;
+        cursor: pointer;
+      }
+      .weather-widget button:hover {
+        background: #00021c;
+      }
+      .weather-info {
+        margin-top: 20px;
+      }
+      .weather-info .city {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .weather-info .city h3 {
+        margin: 0;
+      }
+      .weather-info .city span {
+        margin-left: 10px;
+        cursor: pointer;
+        color: #888;
+      }
+      .weather-info .city span:hover {
+        color: #555;
+      }
+      .weather-emoji {
+        font-size: 2.5rem;
+      }
+      .temperature {
+        font-size: 50px;
+        color: #000;
+        margin: 5px 0;
+      }
+      .details {
+        font-size: 17px;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+      }
+      .details div {
+        text-align: center;
+      }
+      .details div p {
+        margin: 5px 0;
+      }
+      .details div .icon {
+        font-size: 1.5rem;
+      }
+      .left_side {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+      }
+      #todo-list {
+        color: #fff;
+        background: rgba(0, 0, 0, 0.418);
+        padding: 50px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
+        width: 300px;
+
+        margin-left: 140px;
+        margin-top: 30px;
+      }
+      #todo-list ul {
+        display: block;
+        list-style-type: none;
+        padding: 0;
+      }
+      #todo-list li {
+        background-color: #fff;
+        border: none;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 13px;
+      }
+      #todo-list li.completed {
+        text-decoration: none;
+        color: #888;
+      }
+      #todo-list input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        border: none;
+        outline: none;
+      }
+      #todo-list button {
+        background-color: #000;
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.292); */
+        color: #fff;
+        border: none;
+
+        cursor: pointer;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      #tasks button {
+        background-color: transparent;
+        box-shadow: none;
+        float: right;
+        padding: 0;
+      }
+      .todo-head {
+        text-align: center;
+        font-size: 30px;
+        padding-bottom: 20px;
+      }
+      .input_text {
+        display: flex;
+      }
+    </style>
+
+    <div class="main_container">
+      <div id="background-container">
+        <ul
+          id="initial-context-menu"
+          class="context-menu"
+          style="display: none"
+        >
+          <li id="change-background">Change Background</li>
+        </ul>
+        <ul
+          id="secondary-context-menu"
+          class="context-menu"
+          style="display: none"
+        >
+          <li id="cars-option">Cars</li>
+          <li id="bikes-option">Bikes</li>
+          <li id="random-option">Random</li>
+        </ul>
+        <div
+          id="cars-context-menu"
+          class="context-menu thumbnail-grid"
+          style="display: none"
+        >
+          <!-- Cars images will be populated by JavaScript -->
+        </div>
+        <div
+          id="bikes-context-menu"
+          class="context-menu thumbnail-grid"
+          style="display: none"
+        >
+          <!-- Bikes images will be populated by JavaScript -->
+        </div>
+      </div>
+      <div class="right_side"></div>
+      <div class="left_side">
+        <div class="weather-widget">
+          <h2 id="widgetTitle">Weather</h2>
+          <div class="location-input">
+            <input type="text" id="city" placeholder="Enter city" />
+            <button id="getWeather">Get Weather</button>
+            <button id="autoDetect">Auto Detect Location</button>
+          </div>
+          <div class="weather-info" id="weatherInfo"></div>
+        </div>
+        <div id="todo-list">
+          <h2 class="todo-head">TO-DO LIST</h2>
+          <div class="input_text">
+            <input type="text" id="taskInput" placeholder="Enter task..." />
+            <button onclick="addTask()">Add</button>
+          </div>
+          <ul id="tasks"></ul>
+        </div>
+      </div>
+
+      <div class="container">
+        <!--TIME-->
+        <div id="container">
+          <p id="clock"></p>
+        </div>
+        <!--DATE-->
+        <div class="date-container">
+          <div id="date-info">
+            <p>Loading...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      //BACKGROUND
+      const cars = [
+        { name: "Car 1", url: "car1.jpg" },
+        { name: "Car 2", url: "car2.jpg" },
+        { name: "Car 3", url: "car3.jpg" },
+        { name: "Car 4", url: "car4.jpg" },
+        // Add more car images as needed
+      ];
+
+      const bikes = [
+        { name: "Bike 1", url: "bike1.jpg" },
+        { name: "Bike 2", url: "bike2.jpg" },
+        { name: "Bike 3", url: "bike3.jpg" },
+        { name: "Bike 4", url: "bike4.jpg" },
+        // Add more bike images as needed
+      ];
+
+      const backgroundContainer = document.getElementById(
+        "background-container"
+      );
+      const initialContextMenu = document.getElementById(
+        "initial-context-menu"
+      );
+      const secondaryContextMenu = document.getElementById(
+        "secondary-context-menu"
+      );
+      const carsContextMenu = document.getElementById("cars-context-menu");
+      const bikesContextMenu = document.getElementById("bikes-context-menu");
+      const changeBackgroundOption =
+        document.getElementById("change-background");
+      const carsOption = document.getElementById("cars-option");
+      const bikesOption = document.getElementById("bikes-option");
+      const randomOption = document.getElementById("random-option");
+
+      // Populate the cars context menu with image thumbnails
+      cars.forEach((car) => {
+        const thumbnail = document.createElement("img");
+        thumbnail.src = car.url;
+        thumbnail.alt = car.name;
+        thumbnail.className = "thumbnail";
+        thumbnail.addEventListener("click", () => {
+          backgroundContainer.style.backgroundImage = `url(${car.url})`;
+          localStorage.setItem("backgroundImage", car.url);
+          carsContextMenu.style.display = "none";
+        });
+        carsContextMenu.appendChild(thumbnail);
+      });
+
+      // Populate the bikes context menu with image thumbnails
+      bikes.forEach((bike) => {
+        const thumbnail = document.createElement("img");
+        thumbnail.src = bike.url;
+        thumbnail.alt = bike.name;
+        thumbnail.className = "thumbnail";
+        thumbnail.addEventListener("click", () => {
+          backgroundContainer.style.backgroundImage = `url(${bike.url})`;
+          localStorage.setItem("backgroundImage", bike.url);
+          bikesContextMenu.style.display = "none";
+        });
+        bikesContextMenu.appendChild(thumbnail);
+      });
+
+      // Function to show the context menu at the click position
+      function showMenu(menu, mouseX, mouseY) {
+        menu.style.top = `${mouseY}px`;
+        menu.style.left = `${mouseX}px`;
+        menu.style.display = "block";
+      }
+
+      // Event listener for right-click to show the initial context menu
+      backgroundContainer.addEventListener("contextmenu", (event) => {
+        event.preventDefault(); // Prevent the default context menu
+        const { clientX: mouseX, clientY: mouseY } = event;
+
+        // Position and show the initial context menu
+        showMenu(initialContextMenu, mouseX, mouseY);
+        secondaryContextMenu.style.display = "none";
+        carsContextMenu.style.display = "none";
+        bikesContextMenu.style.display = "none";
+      });
+
+      // Event listener for "Change Background" option
+      changeBackgroundOption.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent the click event from propagating to the document
+        const rect = initialContextMenu.getBoundingClientRect();
+        const mouseX = rect.left;
+        const mouseY = rect.top;
+
+        initialContextMenu.style.display = "none";
+        showMenu(secondaryContextMenu, mouseX, mouseY);
+      });
+
+      // Event listener for "Cars" option
+      carsOption.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent the click event from propagating to the document
+        const rect = secondaryContextMenu.getBoundingClientRect();
+        const mouseX = rect.left;
+        const mouseY = rect.top;
+
+        secondaryContextMenu.style.display = "none";
+        showMenu(carsContextMenu, mouseX, mouseY);
+      });
+
+      // Event listener for "Bikes" option
+      bikesOption.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent the click event from propagating to the document
+        const rect = secondaryContextMenu.getBoundingClientRect();
+        const mouseX = rect.left;
+        const mouseY = rect.top;
+
+        secondaryContextMenu.style.display = "none";
+        showMenu(bikesContextMenu, mouseX, mouseY);
+      });
+
+      // Event listener for "Random" option
+      randomOption.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent the click event from propagating to the document
+        const allImages = [...cars, ...bikes];
+        const randomImage =
+          allImages[Math.floor(Math.random() * allImages.length)];
+        backgroundContainer.style.backgroundImage = `url(${randomImage.url})`;
+        localStorage.setItem("backgroundImage", randomImage.url);
+        secondaryContextMenu.style.display = "none";
+      });
+
+      // Load the background image from localStorage on page load
+      window.onload = () => {
+        const savedBackgroundImage = localStorage.getItem("backgroundImage");
+        if (savedBackgroundImage) {
+          backgroundContainer.style.backgroundImage = `url(${savedBackgroundImage})`;
+        }
+      };
+
+      // Event listener to hide context menus when clicking elsewhere
+      document.addEventListener("click", (event) => {
+        if (
+          !initialContextMenu.contains(event.target) &&
+          !secondaryContextMenu.contains(event.target) &&
+          !carsContextMenu.contains(event.target) &&
+          !bikesContextMenu.contains(event.target)
+        ) {
+          initialContextMenu.style.display = "none";
+          secondaryContextMenu.style.display = "none";
+          carsContextMenu.style.display = "none";
+          bikesContextMenu.style.display = "none";
+        }
+      });
+      //TIME
+      function displayTime() {
+        var d = new Date();
+        var hour = d.getHours();
+        var min = d.getMinutes();
+        var sec = d.getSeconds();
+        var amOrPm = "AM";
+        if (hour >= 12) {
+          amOrPm = "PM";
+        }
+        if (hour > 12) {
+          hour = hour - 12;
+        }
+        if (hour < 10) hour = "0" + hour;
+        if (min < 10) min = "0" + min;
+        // if (sec < 10) sec = "0" + sec;
+        document.getElementById("clock").innerHTML =
+          hour + ":" + min + " " + amOrPm;
+      }
+      setInterval(displayTime, 1000);
+      //Date
+      function updateDate() {
+        const dateInfoDiv = document.getElementById("date-info");
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = now.toLocaleString("default", { month: "long" });
+        const date = now.getDate();
+        const day = now.toLocaleString("default", { weekday: "long" });
+
+        dateInfoDiv.innerHTML = `
+                <p>${date} ${month} ${year}</p>
+            `;
+      }
+
+      // Update the date every second
+      setInterval(updateDate, 1000);
+
+      // Initial update
+      updateDate();
+
+      //WEATHER
+
+      const apiKey = "5c4f40a3458f8908bee1d717b62fb8cf"; // Replace with your OpenWeatherMap API key
+      let intervalId;
+
+      document.getElementById("getWeather").addEventListener("click", () => {
+        const city = document.getElementById("city").value;
+        if (city) {
+          fetchWeather(city);
+          localStorage.setItem("city", city);
+          clearInterval(intervalId);
+          intervalId = setInterval(() => fetchWeather(city), 600000); // Update every 10 minutes
+        }
+      });
+
+      document.getElementById("autoDetect").addEventListener("click", () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            fetchWeatherByCoords(lat, lon);
+            clearInterval(intervalId);
+            intervalId = setInterval(
+              () => fetchWeatherByCoords(lat, lon),
+              600000
+            ); // Update every 10 minutes
+          });
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const storedCity = localStorage.getItem("city");
+        if (storedCity) {
+          fetchWeather(storedCity);
+          intervalId = setInterval(() => fetchWeather(storedCity), 600000); // Update every 10 minutes
+        }
+      });
+
+      function fetchWeather(city) {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+        )
+          .then((response) => response.json())
+          .then((data) => displayWeather(data))
+          .catch((error) => alert("Error fetching weather data: " + error));
+      }
+
+      function fetchWeatherByCoords(lat, lon) {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            displayWeather(data);
+            localStorage.setItem("city", data.name);
+          })
+          .catch((error) => alert("Error fetching weather data: " + error));
+      }
+
+      function displayWeather(data) {
+        if (data.cod === 200) {
+          const weatherInfo = document.getElementById("weatherInfo");
+          const widgetTitle = document.getElementById("widgetTitle");
+          widgetTitle.style.display = "none";
+
+          let weatherEmoji;
+          const main = data.weather[0].main.toLowerCase();
+          if (main.includes("clear")) {
+            weatherEmoji = "☀️";
+          } else if (main.includes("clouds")) {
+            weatherEmoji = "☁️";
+          } else if (main.includes("rain")) {
+            weatherEmoji = "🌧️";
+          } else if (main.includes("snow")) {
+            weatherEmoji = "❄️";
+          } else {
+            weatherEmoji = "🌈";
+          }
+
+          weatherInfo.innerHTML = `
+                    <div class="city">
+                        <h3>${data.name}</h3><span id="editLocation">✏️</span>
+                    </div>
+                    <div class="weather-emoji">${weatherEmoji}</div>
+                    <div class="temperature">${data.main.temp}°C</div>
+                    <div class="details">
+                        <div>
+                            <div class="icon">🌡️</div>
+                            <p> ${data.main.feels_like}°C</p>
+                        </div>
+                        <div>
+                            <div class="icon">💧</div>
+                            <p> ${data.main.humidity}%</p>
+                        </div>
+                        <div>
+                            <div class="icon">🌬️</div>
+                            <p> ${data.wind.speed} m/s</p>
+                        </div>
+                    </div>
+                `;
+          document.querySelector(".location-input").style.display = "none";
+          document
+            .getElementById("editLocation")
+            .addEventListener("click", () => {
+              document.querySelector(".location-input").style.display = "block";
+              document.getElementById("widgetTitle").style.display = "block";
+              weatherInfo.innerHTML = "";
+              localStorage.removeItem("city");
+              clearInterval(intervalId);
+            });
+        } else {
+          alert("City not found");
+        }
+      }
+      let tasks = localStorage.getItem("tasks")
+        ? JSON.parse(localStorage.getItem("tasks"))
+        : [];
+
+      // Display the saved tasks
+      tasks.forEach((task) => {
+        addTaskToDOM(task);
+      });
+
+      // Function to add a task
+      function addTask() {
+        let taskInput = document.getElementById("taskInput");
+        let taskText = taskInput.value.trim();
+        if (taskText !== "") {
+          let task = { text: taskText, completed: false };
+          tasks.push(task);
+          localStorage.setItem("tasks", JSON.stringify(tasks));
+          addTaskToDOM(task);
+          taskInput.value = ""; // Clear the input field
+        }
+      }
+
+      // Function to add a task to the DOM
+      function addTaskToDOM(task) {
+        let tasksList = document.getElementById("tasks");
+        let taskItem = document.createElement("li");
+        taskItem.textContent = task.text;
+        if (task.completed) {
+          taskItem.classList.add("completed");
+        }
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "❌";
+        deleteButton.onclick = function () {
+          removeTask(task);
+          tasksList.removeChild(taskItem);
+        };
+        taskItem.appendChild(deleteButton);
+        tasksList.appendChild(taskItem);
+      }
+
+      // Function to remove a task
+      function removeTask(taskToRemove) {
+        tasks = tasks.filter((task) => task !== taskToRemove);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+    </script>
+  </body>
 </html>
