@@ -3,7 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>New Tab</title>
+    <!-- CSS FILES -->
+    <link rel="stylesheet" href="css/pomodoroTimer.css" />
+    <link rel="stylesheet" href="css/backgroundMusic.css" />
+    <!-- JS FILES -->
+
+    <script src="javascript/pomodoroTimer.js" defer></script>
+    <!-- <script src="javascript/backgroundMusic.js" defer></script> -->
   </head>
   <body>
     <style>
@@ -312,14 +319,67 @@
       <div class="right_side">
         <!-- background music -->
         <div class="container-music">
-          <h1>music player</h1>
+          <div class="cover-art" id="cover-art">🎵</div>
+          <div class="cover-art-text">Choose a track to play</div>
+          <div class="controls">
+            <button id="toggle" disabled>▶</button>
+          </div>
+          <ul class="track-list">
+            <li
+              data-audio="music/bustlingCafe.mp3"
+              data-cover="music/bustlingCafe.avif"
+            >
+              Bustling Cafe
+            </li>
+            <li data-audio="music/rainyVibes.mp3" data-cover="music/rainy.jpeg">
+              Rainy Vibes
+            </li>
+            <li data-audio="music/LofiSounds.mp3" data-cover="music/lofi.jpeg">
+              Lofi Music
+            </li>
+          </ul>
+          <div id="warning" class="warning" style="display: none">
+            Please select a track to start playing.
+          </div>
         </div>
 
         <div class="container-pomodoro_timer">
-          <h1>pomodoro timer</h1>
+          <h1 id="status">Work Time</h1>
+          <div class="timer" id="timer">25:00</div>
+          <div class="preset-buttons" id="preset-buttons">
+            <button onclick="setPreset(25, 5)">25/5</button>
+            <button onclick="setPreset(50, 10)">50/10</button>
+          </div>
+          <button id="start-stop-btn" onclick="startStopTimer()">Start</button>
+          <button
+            id="start-break-btn"
+            style="display: none"
+            onclick="startBreak()"
+          >
+            Start Break
+          </button>
+          <form id="new-preset-form" onsubmit="addPreset(event)">
+            <input
+              type="number"
+              id="work-time"
+              placeholder="Work"
+              min="1"
+              required
+            />
+            <input
+              type="number"
+              id="break-time"
+              placeholder="Break"
+              min="1"
+              required
+            />
+            <button type="submit">Add Preset</button>
+          </form>
+          <audio id="alarm-audio" src="music/audio.wav"></audio>
         </div>
       </div>
     </div>
+
     <script>
       //BACKGROUND
       const cars = [

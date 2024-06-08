@@ -1,0 +1,79 @@
+.container-music {
+  background-color: #007bff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  width: 300px;
+}
+
+.cover-art {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cover-art-text {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+.controls button {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #007bff;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.controls button:hover {
+  background-color: #e6f7ff;
+}
+
+.controls button:disabled {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.track-list {
+  list-style: none;
+  padding: 0;
+}
+
+.track-list li {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.track-list li.playing::after {
+  content: " - Playing";
+  color: #fff;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.warning {
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 5px;
+}
