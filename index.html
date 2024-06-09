@@ -21,20 +21,6 @@
   </head>
   <body>
     <style>
-      /* can't take this to main.css  */
-      #background-container {
-        margin-top: -50px;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-size: cover;
-        background-position: center;
-        background-image: url("images/default-image.jpg"); /* Default background image */
-        position: absolute;
-      }
-
       .container {
         position: absolute;
         top: 50%;
@@ -44,49 +30,33 @@
     </style>
 
     <div class="main_container">
-      <div id="background-container" class="backgroundContainer">
-        <ul
-          id="initial-context-menu"
-          class="context-menu"
-          style="display: none"
-        >
-          <li id="change-background">Change Background</li>
-        </ul>
-        <ul
-          id="secondary-context-menu"
-          class="context-menu"
-          style="display: none"
-        >
-          <li id="cars-option">Cars</li>
-          <li id="bikes-option">Bikes</li>
-          <li id="random-option">Random</li>
-        </ul>
-        <div
-          id="cars-context-menu"
-          class="context-menu thumbnail-grid"
-          style="display: none"
-        >
-          <!-- Cars images will be populated by JavaScript -->
-        </div>
-        <div
-          id="bikes-context-menu"
-          class="context-menu thumbnail-grid"
-          style="display: none"
-        >
-          <!-- Bikes images will be populated by JavaScript -->
-        </div>
-      </div>
-
       <div class="left_side">
-        <div class="weather-widget">
-          <h2 id="widgetTitle">Weather</h2>
-          <div class="location-input">
-            <input type="text" id="city" placeholder="Enter city" />
-            <button id="getWeather">Get Weather</button>
-            <button id="autoDetect">Auto Detect Location</button>
+        <div class="container-music">
+          <div class="cover-art" id="cover-art"><p>🎵</p></div>
+          <div class="cover-art-text">Choose a track to play</div>
+          <div class="controls">
+            <button id="toggle" disabled>▶</button>
           </div>
-          <div class="weather-info" id="weatherInfo"></div>
+          <ul class="track-list">
+            <li
+              data-audio="music/bustlingCafe.mp3"
+              data-cover="music/bustlingCafe.avif"
+            >
+              Bustling Cafe
+            </li>
+            <li data-audio="music/rainyVibes.mp3" data-cover="music/rainy.jpeg">
+              Rainy Vibes
+            </li>
+            <li data-audio="music/LofiSounds.mp3" data-cover="music/lofi.jpeg">
+              Lofi Music
+            </li>
+          </ul>
+          <div id="warning" class="warning" style="display: none">
+            Please select a track to start playing.
+          </div>
+          <audio id="audio" loop></audio>
         </div>
+
         <div id="todo-list">
           <h2 class="todo-head">TO-DO LIST</h2>
           <div class="input_text">
@@ -112,30 +82,14 @@
 
       <div class="right_side">
         <!-- background music -->
-        <div class="container-music">
-          <div class="cover-art" id="cover-art">🎵</div>
-          <div class="cover-art-text">Choose a track to play</div>
-          <div class="controls">
-            <button id="toggle" disabled>▶</button>
+        <div class="weather-widget">
+          <h2 id="widgetTitle">Weather</h2>
+          <div class="location-input">
+            <input type="text" id="city" placeholder="Enter city" />
+            <button id="getWeather">Get Weather</button>
+            <button id="autoDetect">Auto Detect Location</button>
           </div>
-          <ul class="track-list">
-            <li
-              data-audio="music/bustlingCafe.mp3"
-              data-cover="music/bustlingCafe.avif"
-            >
-              Bustling Cafe
-            </li>
-            <li data-audio="music/rainyVibes.mp3" data-cover="music/rainy.jpeg">
-              Rainy Vibes
-            </li>
-            <li data-audio="music/LofiSounds.mp3" data-cover="music/lofi.jpeg">
-              Lofi Music
-            </li>
-          </ul>
-          <div id="warning" class="warning" style="display: none">
-            Please select a track to start playing.
-          </div>
-          <audio id="audio" loop></audio>
+          <div class="weather-info" id="weatherInfo"></div>
         </div>
         <!-- pomodoro timer -->
         <div class="container-pomodoro_timer">
@@ -177,150 +131,43 @@
 
     <script>
       //BACKGROUND
-      const cars = [
-        { name: "Car 1", url: "images/car1.jpg" },
-        { name: "Car 2", url: "images/car2.jpg" },
-        { name: "Car 3", url: "images/car3.jpg" },
-        { name: "Car 4", url: "images/car4.jpg" },
-        // Add more car images as needed
-      ];
+      document.addEventListener("DOMContentLoaded", () => {
+        const colors = [
+          "#F5F5F5",
+          "#FFFFFF",
+          "#2C2C2C",
+          "#001F3F",
+          "#FF7E5F",
+          "#FEB47B",
+          "#89F7FE",
+          "#66A6FF",
+          "#85FFBD",
+          "#FFFB7D",
+        ];
 
-      const bikes = [
-        { name: "Bike 1", url: "images/bike1.jpg" },
-        { name: "Bike 2", url: "images/bike2.jpg" },
-        { name: "Bike 3", url: "images/bike3.jpg" },
-        { name: "Bike 4", url: "images/bike4.jpg" },
-        // Add more bike images as needed
-      ];
+        const gradients = [
+          "linear-gradient(to right, #FF7E5F, #FEB47B)",
+          "linear-gradient(to right, #89F7FE, #66A6FF)",
+          "linear-gradient(to right, #85FFBD, #FFFB7D)",
+          "linear-gradient(to right, #FF512F, #DD2476)",
+          "linear-gradient(to right, #00C9FF, #92FE9D)",
+          "linear-gradient(to right, #FFDEE9, #B5FFFC)",
+          "linear-gradient(to right, #00F260, #0575E6)",
+          "linear-gradient(to right, #FC5C7D, #6A82FB)",
+          "linear-gradient(to right, #FAD961, #F76B1C)",
+          "linear-gradient(to right, #3A1C71, #D76D77, #FFAF7B)",
+        ];
 
-      const backgroundContainer = document.getElementById(
-        "background-container"
-      );
-      const initialContextMenu = document.getElementById(
-        "initial-context-menu"
-      );
-      const secondaryContextMenu = document.getElementById(
-        "secondary-context-menu"
-      );
-      const carsContextMenu = document.getElementById("cars-context-menu");
-      const bikesContextMenu = document.getElementById("bikes-context-menu");
-      const changeBackgroundOption =
-        document.getElementById("change-background");
-      const carsOption = document.getElementById("cars-option");
-      const bikesOption = document.getElementById("bikes-option");
-      const randomOption = document.getElementById("random-option");
+        const allColors = colors.concat(gradients);
+        const randomColor =
+          allColors[Math.floor(Math.random() * allColors.length)];
 
-      // Populate the cars context menu with image thumbnails
-      cars.forEach((car) => {
-        const thumbnail = document.createElement("img");
-        thumbnail.src = car.url;
-        thumbnail.alt = car.name;
-        thumbnail.className = "thumbnail";
-        thumbnail.addEventListener("click", () => {
-          backgroundContainer.style.backgroundImage = `url(${car.url})`;
-          localStorage.setItem("backgroundImage", car.url);
-          carsContextMenu.style.display = "none";
-        });
-        carsContextMenu.appendChild(thumbnail);
-      });
-
-      // Populate the bikes context menu with image thumbnails
-      bikes.forEach((bike) => {
-        const thumbnail = document.createElement("img");
-        thumbnail.src = bike.url;
-        thumbnail.alt = bike.name;
-        thumbnail.className = "thumbnail";
-        thumbnail.addEventListener("click", () => {
-          backgroundContainer.style.backgroundImage = `url(${bike.url})`;
-          localStorage.setItem("backgroundImage", bike.url);
-          bikesContextMenu.style.display = "none";
-        });
-        bikesContextMenu.appendChild(thumbnail);
-      });
-
-      // Function to show the context menu at the click position
-      function showMenu(menu, mouseX, mouseY) {
-        menu.style.top = `${mouseY}px`;
-        menu.style.left = `${mouseX}px`;
-        menu.style.display = "block";
-      }
-
-      // Event listener for right-click to show the initial context menu
-      backgroundContainer.addEventListener("contextmenu", (event) => {
-        event.preventDefault(); // Prevent the default context menu
-        const { clientX: mouseX, clientY: mouseY } = event;
-
-        // Position and show the initial context menu
-        showMenu(initialContextMenu, mouseX, mouseY);
-        secondaryContextMenu.style.display = "none";
-        carsContextMenu.style.display = "none";
-        bikesContextMenu.style.display = "none";
-      });
-
-      // Event listener for "Change Background" option
-      changeBackgroundOption.addEventListener("click", (event) => {
-        event.stopPropagation(); // Prevent the click event from propagating to the document
-        const rect = initialContextMenu.getBoundingClientRect();
-        const mouseX = rect.left;
-        const mouseY = rect.top;
-
-        initialContextMenu.style.display = "none";
-        showMenu(secondaryContextMenu, mouseX, mouseY);
-      });
-
-      // Event listener for "Cars" option
-      carsOption.addEventListener("click", (event) => {
-        event.stopPropagation(); // Prevent the click event from propagating to the document
-        const rect = secondaryContextMenu.getBoundingClientRect();
-        const mouseX = rect.left;
-        const mouseY = rect.top;
-
-        secondaryContextMenu.style.display = "none";
-        showMenu(carsContextMenu, mouseX, mouseY);
-      });
-
-      // Event listener for "Bikes" option
-      bikesOption.addEventListener("click", (event) => {
-        event.stopPropagation(); // Prevent the click event from propagating to the document
-        const rect = secondaryContextMenu.getBoundingClientRect();
-        const mouseX = rect.left;
-        const mouseY = rect.top;
-
-        secondaryContextMenu.style.display = "none";
-        showMenu(bikesContextMenu, mouseX, mouseY);
-      });
-
-      // Event listener for "Random" option
-      randomOption.addEventListener("click", (event) => {
-        event.stopPropagation(); // Prevent the click event from propagating to the document
-        const allImages = [...cars, ...bikes];
-        const randomImage =
-          allImages[Math.floor(Math.random() * allImages.length)];
-        backgroundContainer.style.backgroundImage = `url(${randomImage.url})`;
-        localStorage.setItem("backgroundImage", randomImage.url);
-        secondaryContextMenu.style.display = "none";
-      });
-
-      // Load the background image from localStorage on page load
-      window.onload = () => {
-        const savedBackgroundImage = localStorage.getItem("backgroundImage");
-        if (savedBackgroundImage) {
-          backgroundContainer.style.backgroundImage = `url(${savedBackgroundImage})`;
-        }
-      };
-
-      // Event listener to hide context menus when clicking elsewhere
-      document.addEventListener("click", (event) => {
-        if (
-          !initialContextMenu.contains(event.target) &&
-          !secondaryContextMenu.contains(event.target) &&
-          !carsContextMenu.contains(event.target) &&
-          !bikesContextMenu.contains(event.target)
-        ) {
-          initialContextMenu.style.display = "none";
-          secondaryContextMenu.style.display = "none";
-          carsContextMenu.style.display = "none";
-          bikesContextMenu.style.display = "none";
+        if (randomColor.startsWith("linear-gradient")) {
+          document.body.style.backgroundImage = randomColor;
+          document.body.style.backgroundColor = "";
+        } else {
+          document.body.style.backgroundColor = randomColor;
+          document.body.style.backgroundImage = "";
         }
       });
       //TIME

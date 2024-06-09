@@ -4,21 +4,12 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
+body {
+  background-color: aqua;
+}
 .main_container {
   display: flex;
   margin-top: 50px;
-}
-#background-container {
-  margin-top: -50px;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  background-image: url("images/default-image.jpg"); /* Default background image */
-  position: absolute;
 }
 
 .context-menu {
