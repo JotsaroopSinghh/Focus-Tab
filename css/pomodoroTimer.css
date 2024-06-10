@@ -33,11 +33,15 @@ button:hover {
   background: rgba(0, 0, 0, 0.618);
 }
 .preset-buttons {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   max-height: 100px;
   overflow-x: auto;
   display: flex;
   gap: 5px;
+}
+
+.preset-buttons button {
+  border: 2px solid white;
 }
 #start-stop-btn,
 #start-break-btn {
@@ -51,6 +55,8 @@ input[type="number"] {
 
   background-color: rgba(0, 0, 0, 0.218);
   border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 #new-preset-form {
   margin-top: 10px;
@@ -59,3 +65,7 @@ input[type="number"] {
   justify-content: center;
 }
 
+::placeholder {
+  font-weight: 600;
+  color: rgb(181, 181, 181);
+}
