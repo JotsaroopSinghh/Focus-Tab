@@ -1,12 +1,14 @@
 .weather-widget {
-  background: rgba(0, 0, 0, 0.418);
+    background: rgba(0, 0, 0, 0.418);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
   width: 300px;
   text-align: center;
-  margin-left: 140px;
-  margin-top: 40px;
+  margin-right: 140px;
+  /* margin-top: 10px; */
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 .weather-widget input,
 .weather-widget button {
@@ -18,12 +20,12 @@
   outline: none;
 }
 .weather-widget button {
-  background: #00021c;
-  color: white;
+  background: #fff;
+  color: black;
   cursor: pointer;
 }
 .weather-widget button:hover {
-  background: #00021c;
+  background: #fff;
 }
 .weather-info {
   margin-top: 20px;
@@ -36,6 +38,7 @@
 }
 .weather-info .city h3 {
   margin: 0;
+  color: #fff;
 }
 .weather-info .city span {
   margin-left: 10px;
@@ -50,7 +53,7 @@
 }
 .temperature {
   font-size: 50px;
-  color: #000;
+  color: #fff;
   margin: 5px 0;
 }
 .details {
@@ -58,6 +61,7 @@
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
+  color: white;
 }
 .details div {
   text-align: center;
