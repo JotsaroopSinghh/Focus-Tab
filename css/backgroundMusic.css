@@ -36,11 +36,11 @@
 }
 
 .controls button {
-  background-color: rgba(255, 255, 255, 0.5);
-  color: #007bff;
+  background-color: rgba(0, 0, 0, 0.418);
+  color: white;
   border: none;
   padding: 10px;
-  border-radius: 50%;
+  border-radius: 12px;
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -48,7 +48,7 @@
 }
 
 .controls button:hover {
-  background-color: #e6f7ff;
+  background-color: rgba(0, 0, 0, 0.818);
 }
 
 .controls button:disabled {

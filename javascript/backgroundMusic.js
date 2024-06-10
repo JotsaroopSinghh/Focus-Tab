@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
       toggleButton.textContent = "▶"; // Show play icon
     } else {
       audioElement.play();
-      toggleButton.textContent = "⏸"; // Show pause icon
+      toggleButton.textContent = "||"; // Show pause icon
     }
     isPlaying = !isPlaying;
   });
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
       currentAudio = audioSrc;
       audioElement.play();
       isPlaying = true;
-      toggleButton.textContent = "⏸"; // Show pause icon
+      toggleButton.textContent = "||"; // Show pause icon
       toggleButton.disabled = false;
 
       // Highlight the currently playing track
