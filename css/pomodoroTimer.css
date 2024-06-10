@@ -26,11 +26,11 @@ button {
   border: none;
   border-radius: 5px;
   color: white;
-  background: #0288d1;
+  background: rgba(0, 0, 0, 0.418);
   transition: background 0.3s ease;
 }
 button:hover {
-  background: #01579b;
+  background: rgba(0, 0, 0, 0.618);
 }
 .preset-buttons {
   margin-bottom: 20px;
@@ -48,7 +48,9 @@ input[type="number"] {
   padding: 5px;
   margin-right: 5px;
   border-radius: 5px;
-  border: 1px solid #0288d1;
+
+  background-color: rgba(0, 0, 0, 0.218);
+  border: none;
 }
 #new-preset-form {
   margin-top: 10px;
@@ -56,3 +58,4 @@ input[type="number"] {
   align-items: center;
   justify-content: center;
 }
+
