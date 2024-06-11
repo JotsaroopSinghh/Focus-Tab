@@ -15,35 +15,44 @@
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const colors = [
-          "#F5F5F5",
-          "#FFFFFF",
-          "#2C2C2C",
-          "#001F3F",
-          "#FF7E5F",
-          "#FEB47B",
-          "#89F7FE",
-          "#66A6FF",
-          "#85FFBD",
-          "#FFFB7D",
+          "#2F4F4F", // Dark Slate Gray
+          "#4B0082", // Indigo
+          "#191970", // Midnight Blue
+          "#556B2F", // Dark Olive Green
+          "#8B4513", // Saddle Brown
+          "#8B0000", // Dark Red
+          "#301934", // Dark Purple
+          "#008B8B", // Dark Cyan
+          "#483D8B", // Dark Slate Blue
+          "#3C1414", // Dark Chocolate
+          "#696969", // Dim Gray
+          "#A9A9A9", // Dark Gray
+          "#808080", // Gray
+          "#2C2C2C", // Dark Gray 2
+          "#1C1C1C", // Very Dark Gray
         ];
 
         const gradients = [
-          "linear-gradient(to right, #FF7E5F, #FEB47B)",
-          "linear-gradient(to right, #89F7FE, #66A6FF)",
-          "linear-gradient(to right, #85FFBD, #FFFB7D)",
-          "linear-gradient(to right, #FF512F, #DD2476)",
-          "linear-gradient(to right, #00C9FF, #92FE9D)",
-          "linear-gradient(to right, #FFDEE9, #B5FFFC)",
-          "linear-gradient(to right, #00F260, #0575E6)",
-          "linear-gradient(to right, #FC5C7D, #6A82FB)",
-          "linear-gradient(to right, #FAD961, #F76B1C)",
-          "linear-gradient(to right, #3A1C71, #D76D77, #FFAF7B)",
+          "linear-gradient(to right, #000000, #434343)", // Black to Dark Gray
+          "linear-gradient(to right, #000000, #191970)", // Black to Midnight Blue
+          "linear-gradient(to right, #000000, #008B8B)", // Black to Dark Cyan
+          "linear-gradient(to right, #000000, #301934)", // Black to Dark Purple
+          "linear-gradient(to right, #000000, #4B0082)", // Black to Indigo
+          "linear-gradient(to right, #000000, #8B0000)", // Black to Dark Red
+          "linear-gradient(to right, #000000, #8B4513)", // Black to Saddle Brown
+          "linear-gradient(to right, #000000, #556B2F)", // Black to Dark Olive Green
+          "linear-gradient(to right, #000000, #483D8B)", // Black to Dark Slate Blue
+          "linear-gradient(to right, #000000, #3C1414)", // Black to Dark Chocolate
         ];
 
+        // Combine both arrays into one
         const allColors = colors.concat(gradients);
+
+        // Get a random color or gradient
         const randomColor =
           allColors[Math.floor(Math.random() * allColors.length)];
 
+        // Apply the color or gradient to the body
         if (randomColor.startsWith("linear-gradient")) {
           document.body.style.backgroundImage = randomColor;
           document.body.style.backgroundColor = "";
@@ -51,6 +60,8 @@
           document.body.style.backgroundColor = randomColor;
           document.body.style.backgroundImage = "";
         }
+
+        console.log("Selected color or gradient:", randomColor); // Debug log
       });
     </script>
   </body>

@@ -28,6 +28,7 @@ button {
   color: white;
   background: rgba(0, 0, 0, 0.418);
   transition: background 0.3s ease;
+  
 }
 button:hover {
   background: rgba(0, 0, 0, 0.618);
@@ -63,5 +64,21 @@ input[type="number"] {
 
 ::placeholder {
   font-weight: 600;
-  color: rgb(181, 181, 181);
+  color: rgb(0, 0, 0);
+}
+
+::-webkit-scrollbar {
+  
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.418);
 }
