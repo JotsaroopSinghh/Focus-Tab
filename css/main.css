@@ -9,7 +9,6 @@ body {
 }
 .main_container {
   display: flex;
-  margin-top: 50px;
 }
 
 .context-menu {
@@ -58,4 +57,5 @@ body {
   display: flex;
   flex-direction: column;
   right: 0px;
+  bottom: 0;
 }
