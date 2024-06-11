@@ -4,14 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random Background Color</title>
-    <style></style>
+    <style>
+      body {
+        transition: background-color 0.5s ease;
+      }
+    </style>
   </head>
   <body>
-    <!-- <div class="widget-box">
-      
-    <!-- </div> -->
-    <!-- Repeat .widget-box for additional widgets -->
-
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const colors = [
@@ -32,36 +31,13 @@
           "#1C1C1C", // Very Dark Gray
         ];
 
-        const gradients = [
-          "linear-gradient(to right, #000000, #434343)", // Black to Dark Gray
-          "linear-gradient(to right, #000000, #191970)", // Black to Midnight Blue
-          "linear-gradient(to right, #000000, #008B8B)", // Black to Dark Cyan
-          "linear-gradient(to right, #000000, #301934)", // Black to Dark Purple
-          "linear-gradient(to right, #000000, #4B0082)", // Black to Indigo
-          "linear-gradient(to right, #000000, #8B0000)", // Black to Dark Red
-          "linear-gradient(to right, #000000, #8B4513)", // Black to Saddle Brown
-          "linear-gradient(to right, #000000, #556B2F)", // Black to Dark Olive Green
-          "linear-gradient(to right, #000000, #483D8B)", // Black to Dark Slate Blue
-          "linear-gradient(to right, #000000, #3C1414)", // Black to Dark Chocolate
-        ];
+        // Get a random color
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
-        // Combine both arrays into one
-        const allColors = colors.concat(gradients);
+        // Apply the color to the body
+        document.body.style.backgroundColor = randomColor;
 
-        // Get a random color or gradient
-        const randomColor =
-          allColors[Math.floor(Math.random() * allColors.length)];
-
-        // Apply the color or gradient to the body
-        if (randomColor.startsWith("linear-gradient")) {
-          document.body.style.backgroundImage = randomColor;
-          document.body.style.backgroundColor = "";
-        } else {
-          document.body.style.backgroundColor = randomColor;
-          document.body.style.backgroundImage = "";
-        }
-
-        console.log("Selected color or gradient:", randomColor); // Debug log
+        console.log("Selected color:", randomColor); // Debug log
       });
     </script>
   </body>
