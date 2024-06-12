@@ -9,6 +9,32 @@ document.addEventListener("DOMContentLoaded", function () {
   let isPlaying = false;
   let currentAudio = null;
 
+  // Load state from localStorage
+  const savedAudioSrc = localStorage.getItem("currentAudio");
+  const savedCurrentTime = parseFloat(localStorage.getItem("currentTime") || "0");
+
+  if (savedAudioSrc) {
+    audioElement.src = savedAudioSrc;
+    currentAudio = savedAudioSrc;
+    audioElement.currentTime = savedCurrentTime;
+
+    // Highlight the currently playing track
+    trackList.forEach((track) => {
+      if (track.getAttribute("data-audio") === savedAudioSrc) {
+        track.classList.add("playing");
+
+        const coverSrc = track.getAttribute("data-cover");
+        coverArt.style.backgroundImage = `url('${coverSrc}')`;
+        coverArt.textContent = ""; // Clear default icon
+        coverArtText.style.display = "none"; // Hide default text
+      }
+    });
+
+    warningMessage.style.display = "none"; // Hide warning message
+    toggleButton.disabled = false; // Enable toggle button
+    toggleButton.textContent = "▶"; // Show play icon
+  }
+
   toggleButton.addEventListener("click", () => {
     if (isPlaying) {
       audioElement.pause();
@@ -18,6 +44,14 @@ document.addEventListener("DOMContentLoaded", function () {
       toggleButton.textContent = "||"; // Show pause icon
     }
     isPlaying = !isPlaying;
+
+    // Save state to localStorage
+    localStorage.setItem("isPlaying", isPlaying);
+  });
+
+  audioElement.addEventListener("timeupdate", () => {
+    // Save the current time to localStorage
+    localStorage.setItem("currentTime", audioElement.currentTime);
   });
 
   trackList.forEach((track) => {
@@ -26,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const coverSrc = track.getAttribute("data-cover");
       audioElement.src = audioSrc;
       currentAudio = audioSrc;
+      audioElement.currentTime = 0; // Reset time to 0 when a new track is selected
       audioElement.play();
       isPlaying = true;
       toggleButton.textContent = "||"; // Show pause icon
@@ -47,6 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
       coverArt.style.backgroundImage = `url('${coverSrc}')`;
       coverArt.textContent = ""; // Clear default icon
       coverArtText.style.display = "none"; // Hide default text
+
+      // Save state to localStorage
+      localStorage.setItem("currentAudio", currentAudio);
+      localStorage.setItem("currentTime", audioElement.currentTime);
     });
   });
 
