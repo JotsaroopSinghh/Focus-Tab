@@ -51,11 +51,13 @@ body {
   position: absolute;
   display: flex;
   flex-direction: column;
+  left: 0px;
+  margin-left: 5vh;
 }
 .right_side {
   position: absolute;
   display: flex;
   flex-direction: column;
   right: 0px;
-  bottom: 0;
+  bottom: 0px;
 }
