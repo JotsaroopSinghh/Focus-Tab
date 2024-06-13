@@ -5,7 +5,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   color: white;
-  width: 300px;
+  min-width: 300px;
+  width: 22.5vw;
   height: 50vh;
   margin-top: 2.5vh;
 }

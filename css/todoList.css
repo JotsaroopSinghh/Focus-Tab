@@ -5,7 +5,8 @@
   padding-top: 2vh;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
-  width: 300px;
+  min-width: 300px;
+  width: 22.5vw;
   height: 40vh;
   margin-top: 5vh;
   margin-bottom: 2.5vh;
