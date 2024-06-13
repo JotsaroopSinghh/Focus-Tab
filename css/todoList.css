@@ -2,6 +2,7 @@
   color: #fff;
   background: rgba(0, 0, 0, 0.418);
   padding: 50px;
+  padding-top: 2vh;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
   width: 300px;
@@ -63,8 +64,7 @@
 }
 .todo-head {
   text-align: center;
-  font-size: 30px;
-  padding-bottom: 20px;
+  padding-bottom: 1vh;
 }
 .input_text {
   display: flex;
@@ -72,7 +72,7 @@
 
 #tasks {
   overflow: auto;
-  max-height: 125px;
+  max-height: 22vh;
 }
 ::-webkit-scrollbar {
   width: 10px;
