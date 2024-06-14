@@ -1,9 +1,7 @@
-// Display the saved tasks
 tasks.forEach((task) => {
   addTaskToDOM(task);
 });
 
-// Function to add a task
 function addTask() {
   let taskInput = document.getElementById("taskInput");
   let taskText = taskInput.value.trim();
@@ -12,11 +10,10 @@ function addTask() {
     tasks.push(task);
     localStorage.setItem("tasks", JSON.stringify(tasks));
     addTaskToDOM(task);
-    taskInput.value = ""; // Clear the input field
+    taskInput.value = "";
   }
 }
 
-// Function to add a task to the DOM
 function addTaskToDOM(task) {
   let tasksList = document.getElementById("tasks");
   let taskItem = document.createElement("li");
@@ -34,7 +31,6 @@ function addTaskToDOM(task) {
   tasksList.appendChild(taskItem);
 }
 
-// Function to remove a task
 function removeTask(taskToRemove) {
   tasks = tasks.filter((task) => task !== taskToRemove);
   localStorage.setItem("tasks", JSON.stringify(tasks));
