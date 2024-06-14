@@ -4,7 +4,6 @@ let isWorkTime = true;
 let timerInterval;
 let totalSeconds = workMinutes * 60;
 
-// Load saved presets and timer state from localStorage
 window.onload = function () {
   loadPresets();
   loadTimerState();
@@ -143,13 +142,13 @@ function resetTimer() {
 function playAlarm() {
   const alarmAudio = document.getElementById("alarm-audio");
   alarmAudio.play();
-  setTimeout(stopAlarm, 3000); // Stop the alarm after 3 seconds
+  setTimeout(stopAlarm, 3000);
 }
 
 function stopAlarm() {
   const alarmAudio = document.getElementById("alarm-audio");
   alarmAudio.pause();
-  alarmAudio.currentTime = 0; // Reset the audio to the beginning
+  alarmAudio.currentTime = 0; 
 }
 
 updateTimerDisplay();
