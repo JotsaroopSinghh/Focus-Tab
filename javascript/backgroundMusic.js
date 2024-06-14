@@ -38,19 +38,17 @@ document.addEventListener("DOMContentLoaded", function () {
   toggleButton.addEventListener("click", () => {
     if (isPlaying) {
       audioElement.pause();
-      toggleButton.textContent = "▶"; // Show play icon
+      toggleButton.textContent = "▶";
     } else {
       audioElement.play();
-      toggleButton.textContent = "||"; // Show pause icon
+      toggleButton.textContent = "||";
     }
     isPlaying = !isPlaying;
 
-    // Save state to localStorage
     localStorage.setItem("isPlaying", isPlaying);
   });
 
   audioElement.addEventListener("timeupdate", () => {
-    // Save the current time to localStorage
     localStorage.setItem("currentTime", audioElement.currentTime);
   });
 
@@ -60,13 +58,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const coverSrc = track.getAttribute("data-cover");
       audioElement.src = audioSrc;
       currentAudio = audioSrc;
-      audioElement.currentTime = 0; // Reset time to 0 when a new track is selected
+      audioElement.currentTime = 0;
       audioElement.play();
       isPlaying = true;
-      toggleButton.textContent = "||"; // Show pause icon
+      toggleButton.textContent = "||";
       toggleButton.disabled = false;
 
-      // Highlight the currently playing track
       trackList.forEach((item) => {
         if (item === track) {
           item.classList.add("playing");
@@ -75,29 +72,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // Show warning message if a track is selected
       warningMessage.style.display = "none";
 
-      // Set cover art
       coverArt.style.backgroundImage = `url('${coverSrc}')`;
-      coverArt.textContent = ""; // Clear default icon
-      coverArtText.style.display = "none"; // Hide default text
+      coverArt.textContent = "";
+      coverArtText.style.display = "none";
 
-      // Save state to localStorage
       localStorage.setItem("currentAudio", currentAudio);
       localStorage.setItem("currentTime", audioElement.currentTime);
     });
   });
 
-  // Show default cover art when no track is selected
   toggleButton.addEventListener("click", () => {
     if (!currentAudio) {
-      coverArt.textContent = "🎵"; // Show default icon
-      coverArtText.style.display = "block"; // Show default text
+      coverArt.textContent = "🎵";
+      coverArtText.style.display = "block";
     }
   });
 
-  // Show warning message if no track is selected
   toggleButton.addEventListener("click", () => {
     if (!currentAudio) {
       warningMessage.style.display = "block";
