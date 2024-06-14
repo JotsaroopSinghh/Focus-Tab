@@ -82,14 +82,13 @@
             <p>Loading...</p>
           </div>
         </div>
+        <div class="quote">
+          <p id="quote-text"></p>
+          <p id="quote-author"></p>
+        </div>
       </div>
 
       <!--QUOTES-->
-
-      <div class="quote">
-        <p id="quote-text"></p>
-        <p id="quote-author"></p>
-      </div>
 
       <div class="right_side">
         <!-- background music -->
@@ -141,7 +140,6 @@
     </div>
 
     <script>
-      //BACKGROUND
 
       //TIME
       function displayTime() {
@@ -158,7 +156,6 @@
         }
         if (hour < 10) hour = "0" + hour;
         if (min < 10) min = "0" + min;
-        // if (sec < 10) sec = "0" + sec;
         document.getElementById("clock").innerHTML =
           hour + ":" + min + " " + amOrPm;
       }
@@ -196,7 +193,7 @@
           tasks.push(task);
           localStorage.setItem("tasks", JSON.stringify(tasks));
           addTaskToDOM(task);
-          taskInput.value = ""; 
+          taskInput.value = "";
         }
       }
 
