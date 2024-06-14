@@ -62,6 +62,7 @@
   box-shadow: none;
   float: right;
   padding: 0;
+  margin: 0;
 }
 .todo-head {
   text-align: center;
