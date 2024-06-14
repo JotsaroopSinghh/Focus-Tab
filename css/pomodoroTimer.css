@@ -70,12 +70,10 @@ input[type="number"] {
   height: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.418);

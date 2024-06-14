@@ -80,12 +80,10 @@
   height: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.418);
 }

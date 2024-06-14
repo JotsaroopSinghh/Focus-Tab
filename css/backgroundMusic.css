@@ -13,7 +13,8 @@
 
 .cover-art {
   width: 100%;
-  height: 140px;
+  height: 22vh;
+  min-height: 140px;
   border-radius: 12px;
   margin-bottom: 5px;
   background-size: cover;
@@ -43,8 +44,10 @@
   padding: 10px;
   border-radius: 12px;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 6vh;
+  height: 6vh;
+  min-width: 40px;
+  min-width: 40px;
   font-size: 1em;
   margin: 0;
 }
@@ -71,6 +74,8 @@
 
   position: relative;
   font-size: 0.8em;
+  height: 6vh;
+  min-height: 36px;
 }
 
 .track-list li.playing::after {

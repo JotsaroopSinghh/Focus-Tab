@@ -9,30 +9,30 @@ document.addEventListener("DOMContentLoaded", function () {
   let isPlaying = false;
   let currentAudio = null;
 
-  // Load state from localStorage
   const savedAudioSrc = localStorage.getItem("currentAudio");
-  const savedCurrentTime = parseFloat(localStorage.getItem("currentTime") || "0");
+  const savedCurrentTime = parseFloat(
+    localStorage.getItem("currentTime") || "0"
+  );
 
   if (savedAudioSrc) {
     audioElement.src = savedAudioSrc;
     currentAudio = savedAudioSrc;
     audioElement.currentTime = savedCurrentTime;
 
-    // Highlight the currently playing track
     trackList.forEach((track) => {
       if (track.getAttribute("data-audio") === savedAudioSrc) {
         track.classList.add("playing");
 
         const coverSrc = track.getAttribute("data-cover");
         coverArt.style.backgroundImage = `url('${coverSrc}')`;
-        coverArt.textContent = ""; // Clear default icon
-        coverArtText.style.display = "none"; // Hide default text
+        coverArt.textContent = "";
+        coverArtText.style.display = "none";
       }
     });
 
-    warningMessage.style.display = "none"; // Hide warning message
-    toggleButton.disabled = false; // Enable toggle button
-    toggleButton.textContent = "▶"; // Show play icon
+    warningMessage.style.display = "none";
+    toggleButton.disabled = false;
+    toggleButton.textContent = "▶";
   }
 
   toggleButton.addEventListener("click", () => {
