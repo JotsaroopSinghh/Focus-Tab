@@ -5,19 +5,15 @@
           const storedQuote = localStorage.getItem("quote");
           const storedDate = localStorage.getItem("date");
 
-          // Check if a quote exists in local storage and it's from today
           if (storedQuote && storedDate === getCurrentDate()) {
             displayQuote(storedQuote);
           } else {
-            // Fetch a new quote
             const response = await fetch("https://api.quotable.io/random");
             const data = await response.json();
             let quoteText = data.content;
             const quoteAuthor = data.author;
 
-            // Check if the quote is too long
             if (quoteText.length > 100) {
-              // Fetch a new quote until we find one that is short enough
               while (quoteText.length > 100) {
                 const newResponse = await fetch(
                   "https://api.quotable.io/random"
@@ -27,7 +23,6 @@
               }
             }
 
-            // Save the new quote and date in local storage
             localStorage.setItem("quote", `${quoteText} - ${quoteAuthor}`);
             localStorage.setItem("date", getCurrentDate());
 
