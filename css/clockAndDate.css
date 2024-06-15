@@ -15,6 +15,7 @@
   height: 25vw;
   min-height: 300px;
   justify-content: center;
+  align-items: center;
 }
 
 .date-container {
@@ -35,4 +36,5 @@
   height: 25vw;
   min-height: 300px;
   justify-content: center;
+  align-items: center;
 }
