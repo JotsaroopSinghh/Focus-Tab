@@ -36,6 +36,7 @@
   justify-content: flex-end;
   align-items: center;
   margin-bottom: 10px;
+  font-size: 1.5vw;
 }
 .weather-info .city h3 {
   margin: 0;
@@ -50,15 +51,15 @@
   color: #555;
 }
 .weather-emoji {
-  font-size: 2.5rem;
+  font-size: 3vw;
 }
 .temperature {
-  font-size: 3em;
+  font-size: 3.5vw;
   color: #fff;
   margin: 5px 0;
 }
 .details {
-  font-size: 17px;
+  font-size: 1.5vw;
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
@@ -71,5 +72,5 @@
   margin: 5px 0;
 }
 .details div .icon {
-  font-size: 1.5rem;
+  font-size: 2.5vw;
 }
