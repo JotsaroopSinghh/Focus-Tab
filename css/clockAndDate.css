@@ -8,8 +8,10 @@
   padding: 130px 0px;
   background-color: rgba(0, 0, 0, 0.418);
   text-align: center;
-  width: 27.5vw;
+  width: 25vw;
   min-width: 300px;
+  height: 25vw;
+  min-height: 300px;
 }
 
 .date-container {
@@ -24,6 +26,8 @@
   padding: 130px 45px;
   border-radius: 50%;
   text-align: center;
-  width: 27.5vw;
+  width: 25vw;
   min-width: 300px;
+  height: 25vw;
+  min-height: 300px;
 }
