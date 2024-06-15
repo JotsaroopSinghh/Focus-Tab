@@ -4,4 +4,6 @@
   color: #fff;
   font-size: 1.25vw;
   width: 50vw;
+  position: relative;
+  bottom: 0;
 }
