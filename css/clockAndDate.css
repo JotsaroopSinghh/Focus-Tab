@@ -8,6 +8,7 @@
   padding: 130px 0px;
   background-color: rgba(0, 0, 0, 0.418);
   text-align: center;
+  width: 300px;
 }
 
 .date-container {
@@ -21,4 +22,6 @@
   border-radius: 50%;
   padding: 130px 45px;
   border-radius: 50%;
+  text-align: center;
+  width: 300px;
 }

@@ -1,8 +1,7 @@
 .quote {
-  margin: 0 auto;
+  margin: auto;
   text-align: center;
   color: #fff;
   font-size: 1.25vw;
-  width: 300px;
-  bottom: 5vh;
+  width: 500px;
 }
