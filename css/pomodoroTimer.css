@@ -82,33 +82,29 @@ input[type="number"] {
   background: rgba(0, 0, 0, 0.418);
 }
 
- #pomodoro-title {
-  
-    font-size: 1rem;
-      color: #fff;
-      cursor: pointer;
-    margin-bottom: 10vw;
-      margin-left: 30vw;
-      writing-mode: vertical-rl;
-      transform: rotate(-180deg);
-      
- }
+#pomodoro-title {
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 10vw;
+  margin-left: 30vw;
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+}
 
- #pomodoro-close-btn {
-   display: none;
- }
- @media (max-height:700px) {
-  
-   #pomodoro-title {
+#pomodoro-close-btn {
+  display: none;
+}
+@media (max-height: 700px) {
+  #pomodoro-title {
     font-size: 1rem;
     margin-left: 30vw;
-   }
- }
- @media (max-height:600px) {
-
-   #pomodoro-title {
-     font-size: 1rem;
-     margin-left: 30vw;
-     margin-bottom:2vw;
-   }
- }
+  }
+}
+@media (max-height: 600px) {
+  #pomodoro-title {
+    font-size: 1rem;
+    margin-left: 30vw;
+    margin-bottom: 2vw;
+  }
+}
