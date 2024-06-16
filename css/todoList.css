@@ -89,3 +89,15 @@
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.418);
 }
+
+#todo-title {
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+    transform: rotate(90deg);
+    margin-top: 30vw;
+}
+
+#todo-close-btn {
+  display: none;
+}

@@ -97,3 +97,16 @@
 .track-list li.playing {
   background-color: rgba(0, 0, 0, 0.418);
 }
+
+#music-title {
+ 
+    color: #fff;
+    cursor: pointer;
+   font-size: 1.5rem;
+    transform: rotate(90deg);
+    margin-top: 20vw;
+}
+
+#music-close-btn {
+  display: none;
+}

@@ -150,8 +150,60 @@ function stopAlarm() {
   alarmAudio.pause();
   alarmAudio.currentTime = 0; 
 }
+ function checkPomodoroWindowSize() {
+        const pomodoroWidget = document.getElementById("pomodoro-widget");
+        const pomodoroTitle = document.getElementById("pomodoro-title");
+        const closeButton = document.getElementById("pomodoro-close-btn");
+        if (window.innerWidth <= 1000) {
+          pomodoroWidget.style.display = "none";
+          pomodoroTitle.style.display = "block";
+          closeButton.style.display = "block";
+        } else {
+          pomodoroWidget.style.display = "block";
+          pomodoroTitle.style.display = "none";
+          closeButton.style.display = "none";
+        }
+      }
 
-updateTimerDisplay();
+      function centerPomodoroWidget() {
+        const pomodoroWidget = document.getElementById("pomodoro-widget");
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const widgetWidth = pomodoroWidget.offsetWidth;
+        const widgetHeight = pomodoroWidget.offsetHeight;
+        const left = (windowWidth - widgetWidth) / 2;
+        const top = (windowHeight - widgetHeight) / 2;
+
+        pomodoroWidget.style.left = `${left}px`;
+        pomodoroWidget.style.top = `${top}px`;
+      }
+
+      window.addEventListener("resize", checkPomodoroWindowSize);
+      window.addEventListener("load", checkPomodoroWindowSize);
+
+      document
+        .getElementById("pomodoro-title")
+        .addEventListener("click", () => {
+          const pomodoroWidget = document.getElementById("pomodoro-widget");
+          const pomodoroTitle = document.getElementById("pomodoro-title");
+          pomodoroWidget.style.display = "block";
+          pomodoroTitle.style.display = "none";
+          centerPomodoroWidget();
+        });
+
+      document
+        .getElementById("pomodoro-close-btn")
+        .addEventListener("click", () => {
+          const pomodoroWidget = document.getElementById("pomodoro-widget");
+          const pomodoroTitle = document.getElementById("pomodoro-title");
+          pomodoroWidget.style.display = "none";
+          pomodoroTitle.style.display = "block";
+        });
+
+      window.addEventListener("load", centerPomodoroWidget);
+      window.addEventListener("resize", centerPomodoroWidget);
+
+      updatePomodoroTimerDisplay();
 
 
 

@@ -75,3 +75,63 @@
 .details div .icon {
   font-size: 2.5vw;
 }
+
+#title {
+  
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 15vw;
+  margin-left: 25vw;
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+}
+#close-btn {
+  display: none;
+}
+
+@media (max-height:800px) {
+  #title {
+    font-size: 1vw;
+    margin-bottom: 25vw;
+    /* margin-left: 10vw; */
+    padding-left: 1vw;
+  }
+}
+@media (max-height:550px) {
+  #title {
+    font-size: 1rem;
+    margin-bottom: 7vw;
+  }
+}
+@media (max-width:1000px) {
+  #title {
+    font-size:1.5rem;
+    margin-bottom: 15vw;
+    margin-left: 30vw;
+    
+  }
+}
+
+@media (max-height:1000px) {
+  #title {
+    font-size: 1.5rem;
+    margin-bottom: 25vw;
+    margin-left: 30vw;
+  }
+}
+@media (max-height:700px) {
+  #title {
+    font-size: 1.5rem;
+    margin-bottom: 7vw;
+    margin-left: 30vw;
+  }
+}
+
+@media (max-width:600px) {
+  #title {
+    font-size: 1.5rem;
+    margin-bottom: 20vw;
+    margin-left: 30vw;
+  }
+}

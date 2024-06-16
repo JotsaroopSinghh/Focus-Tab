@@ -26,15 +26,12 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
       }
     </style>
 
     <div class="main_container">
       <div class="left_side">
-        <div class="container-music">
+        <div id="music-widget" class="container-music">
           <div class="cover-art music-emoji" id="cover-art"><p>🎵</p></div>
           <div class="cover-art-text">Choose a track to play</div>
           <div class="controls">
@@ -62,6 +59,10 @@
             Please select a track to start playing.
           </div>
           <audio id="audio" loop></audio>
+          <button id="music-close-btn">Close</button>
+        </div>
+        <div id="music-title">
+          <h2>Music Player</h2>
         </div>
         <!-- todo list -->
         <div id="todo-list">
@@ -71,9 +72,12 @@
             <button onclick="addTask()">Add</button>
           </div>
           <ul id="tasks"></ul>
+          <button id="todo-close-btn">Close</button>
+        </div>
+        <div id="todo-title">
+          <h2>To-Do List</h2>
         </div>
       </div>
-
       <div class="container">
         <!--TIME-->
         <div id="container">
@@ -95,7 +99,7 @@
 
       <div class="right_side">
         <!-- background music -->
-        <div class="weather-widget">
+        <div id="widget" class="weather-widget">
           <h2 id="widgetTitle">Weather</h2>
           <div class="location-input">
             <input type="text" id="city" placeholder="Enter city" />
@@ -103,45 +107,60 @@
             <button id="autoDetect">Auto Detect Location</button>
           </div>
           <div class="weather-info" id="weatherInfo"></div>
+          <button id="close-btn">Close</button>
+        </div>
+        <div id="title">
+          <h2>Weather</h2>
         </div>
         <!-- pomodoro timer -->
-        <div class="container-pomodoro_timer">
-          <h1 id="status">Work Time</h1>
-          <div class="timer" id="timer">25:00</div>
-          <div class="preset-buttons" id="preset-buttons">
-            <button onclick="setPreset(25, 5)">25/5</button>
-            <button onclick="setPreset(50, 10)">50/10</button>
+        <div id="pomodoro-widget" class="container-pomodoro_timer">
+          <h1 id="pomodoro-status">Work Time</h1>
+          <div class="timer" id="pomodoro-timer">25:00</div>
+          <div class="preset-buttons" id="pomodoro-preset-buttons">
+            <button onclick="setPomodoroPreset(25, 5)">25/5</button>
+            <button onclick="setPomodoroPreset(50, 10)">50/10</button>
           </div>
-          <button id="start-stop-btn" onclick="startStopTimer()">Start</button>
           <button
-            id="start-break-btn"
+            id="pomodoro-start-stop-btn"
+            onclick="startStopPomodoroTimer()"
+          >
+            Start
+          </button>
+          <button
+            id="pomodoro-start-break-btn"
             style="display: none"
-            onclick="startBreak()"
+            onclick="startPomodoroBreak()"
           >
             Start Break
           </button>
-          <form id="new-preset-form" onsubmit="addPreset(event)">
+          <form
+            id="pomodoro-new-preset-form"
+            onsubmit="addPomodoroPreset(event)"
+          >
             <input
               type="number"
-              id="work-time"
+              id="pomodoro-work-time"
               placeholder="Work"
               min="1"
               required
             />
             <input
               type="number"
-              id="break-time"
+              id="pomodoro-break-time"
               placeholder="Break"
               min="1"
               required
             />
             <button type="submit">Add Preset</button>
           </form>
-          <audio id="alarm-audio" src="music/audio.wav"></audio>
+          <button id="pomodoro-close-btn">Close</button>
+          <audio id="pomodoro-alarm-audio" src="music/audio.wav"></audio>
+        </div>
+        <div id="pomodoro-title">
+          <h1>Pomodoro Timer</h1>
         </div>
       </div>
     </div>
-
     <script>
       //TIME
       function displayTime() {
