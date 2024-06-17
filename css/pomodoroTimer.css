@@ -84,8 +84,8 @@ input[type="number"] {
 
 @media (max-width: 1000px) {
   .container-pomodoro_timer {
-    width: 40vw;
+    width: 60vw;
     height: 40vh;
-    max-width: 300px;
+    min-width: 550px;
   }
 }
