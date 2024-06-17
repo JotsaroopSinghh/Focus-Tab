@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const warningMessage = document.getElementById("warning");
   const coverArt = document.getElementById("cover-art");
   const coverArtText = document.querySelector(".cover-art-text");
-
+  const navbarPlayButton = document.getElementById("navbar-play-button");
 
   let isPlaying = false;
   let currentAudio = null;
@@ -40,11 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (isPlaying) {
       audioElement.pause();
       toggleButton.textContent = "▶";
-      
+      navbarPlayButton.textContent = "▶";
     } else {
       audioElement.play();
       toggleButton.textContent = "||";
-      
+      navbarPlayButton.textContent = "||";
     }
     isPlaying = !isPlaying;
 
@@ -104,26 +104,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Add to backgroundMusic.js
 
-document.addEventListener('DOMContentLoaded', function () {
-  const toggleButton = document.getElementById('toggle');
-  const navbarPlayButton = document.getElementById('navbar-play-button');
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleButton = document.getElementById("toggle");
+  const navbarPlayButton = document.getElementById("navbar-play-button");
 
   function updateNavbarPlayButton() {
     if (window.innerWidth <= 1000) {
-      navbarPlayButton.style.display = 'inline-block';
-      toggleButton.style.display = 'none';
+      navbarPlayButton.style.display = "inline-block";
+      toggleButton.style.display = "none";
     } else {
-      navbarPlayButton.style.display = 'none';
-      toggleButton.style.display = 'inline-block';
+      navbarPlayButton.style.display = "none";
+      toggleButton.style.display = "inline-block";
     }
   }
 
   updateNavbarPlayButton();
 
-  window.addEventListener('resize', updateNavbarPlayButton);
+  window.addEventListener("resize", updateNavbarPlayButton);
 
-  navbarPlayButton.addEventListener('click', () => {
-    
+  navbarPlayButton.addEventListener("click", () => {
     toggleButton.click();
   });
 });
