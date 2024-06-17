@@ -9,7 +9,7 @@
   width: 22.5vw;
   height: 50vh;
   margin-top: 2.5vh;
-border: 2px solid #fff;
+  border: 2px solid #fff;
 }
 
 .cover-art {
@@ -97,4 +97,15 @@ border: 2px solid #fff;
 
 .track-list li.playing {
   background-color: rgba(0, 0, 0, 0.418);
+}
+
+#navbar-play-button {
+  border: 2px solid white;
+  font-size: 40;
+
+}
+
+#navbar-play-button:hover {
+  color: black;
+  background-color: white;
 }

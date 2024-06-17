@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const coverArt = document.getElementById("cover-art");
   const coverArtText = document.querySelector(".cover-art-text");
 
+
   let isPlaying = false;
   let currentAudio = null;
 
