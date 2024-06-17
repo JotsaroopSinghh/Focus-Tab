@@ -102,7 +102,9 @@
 #navbar-play-button {
   border: 2px solid white;
   font-weight: 900;
-  
+  font-size: 15px;
+  padding: 5px 15px 5px 15px;
+
 }
 
 #navbar-play-button:hover {
