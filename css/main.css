@@ -52,7 +52,7 @@ body {
   display: flex;
   flex-direction: column;
   left: 0px;
-  margin-left: 5vh;
+  /* margin-left: 5vh; */
 }
 .right_side {
   position: absolute;

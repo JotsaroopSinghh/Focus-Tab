@@ -9,6 +9,7 @@
   width: 22.5vw;
   height: 50vh;
   margin-top: 2.5vh;
+  margin-left:5vh;
 }
 
 .cover-art {
@@ -109,4 +110,11 @@
 
 #music-close-btn {
   display: none;
+}
+
+@media (max-width:1000px) {
+  #music-title{
+    margin-right: 0vw;
+    margin-bottom: 20vh;
+  }
 }
