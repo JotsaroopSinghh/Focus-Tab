@@ -75,26 +75,26 @@ function displayWeather(data) {
     }
 
     weatherInfo.innerHTML = `
-                    <div class="city">
-                        <h3>${data.name}</h3><span id="editLocation">✏️</span>
-                    </div>
-                    <div class="weather-emoji">${weatherEmoji}</div>
-                    <div class="temperature">${data.main.temp}°C</div>
-                    <div class="details">
-                        <div>
-                            <div class="icon">🌡️</div>
-                            <p> ${data.main.feels_like}°C</p>
-                        </div>
-                        <div>
-                            <div class="icon">💧</div>
-                            <p> ${data.main.humidity}%</p>
-                        </div>
-                        <div>
-                            <div class="icon">🌬️</div>
-                            <p> ${data.wind.speed} m/s</p>
-                        </div>
-                    </div>
-                `;
+      <div class="city">
+        <h3>${data.name}</h3><span id="editLocation">✏️</span>
+      </div>
+      <div class="weather-emoji">${weatherEmoji}</div>
+      <div class="temperature">${data.main.temp}°C</div>
+      <div class="details">
+        <div>
+          <div class="icon">🌡️</div>
+          <p> ${data.main.feels_like}°C</p>
+        </div>
+        <div>
+          <div class="icon">💧</div>
+          <p> ${data.main.humidity}%</p>
+        </div>
+        <div>
+          <div class="icon">🌬️</div>
+          <p> ${data.wind.speed} m/s</p>
+        </div>
+      </div>
+    `;
     document.querySelector(".location-input").style.display = "none";
     document.getElementById("editLocation").addEventListener("click", () => {
       document.querySelector(".location-input").style.display = "block";
@@ -103,33 +103,33 @@ function displayWeather(data) {
       localStorage.removeItem("city");
       clearInterval(intervalId);
     });
+
+    updateNavbarWeather(data);
   } else {
     alert("City not found");
   }
 }
-let tasks = localStorage.getItem("tasks")
-  ? JSON.parse(localStorage.getItem("tasks"))
-  : [];
 
-  // Add to weather.js
-
-function updateNavbarTemperature(data) {
+function updateNavbarWeather(data) {
   const navbarTemperature = document.getElementById('navbar-temperature');
   if (window.innerWidth <= 1000) {
-    navbarTemperature.innerHTML = `${data.main.temp}°C`;
+    let weatherEmoji;
+    const main = data.weather[0].main.toLowerCase();
+    if (main.includes("clear")) {
+      weatherEmoji = "☀️";
+    } else if (main.includes("clouds")) {
+      weatherEmoji = "☁️";
+    } else if (main.includes("rain")) {
+      weatherEmoji = "🌧️";
+    } else if (main.includes("snow")) {
+      weatherEmoji = "❄️";
+    } else {
+      weatherEmoji = "🌈";
+    }
+
+    navbarTemperature.innerHTML = `${weatherEmoji} ${data.main.temp}°C`;
   } else {
     navbarTemperature.innerHTML = '';
-  }
-}
-
-function displayWeather(data) {
-  if (data.cod === 200) {
-    // Existing code...
-
-    // Add this line to call the new function
-    updateNavbarTemperature(data);
-  } else {
-    alert("City not found");
   }
 }
 
