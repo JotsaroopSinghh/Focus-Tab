@@ -90,10 +90,9 @@
   background: rgba(0, 0, 0, 0.418);
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   #todo-list {
-    width: 50vw;
-    
-    margin-left: 0;
+    width: 40vw;
+  max-width: 300px;
   }
 }

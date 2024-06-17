@@ -67,7 +67,7 @@ body {
 .navbar {
   display: none;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: transparent;
   color: white;
   padding: 10px;
   position: fixed;
@@ -77,6 +77,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 50px;
 }
 
 .navbar-content {
@@ -89,10 +90,9 @@ body {
 @media (max-width: 1000px) {
   .navbar {
     display: flex;
+    background-color: rgba(0, 0, 0, 0.8);
   }
 
-  /* .left_side,
-  .right_side, */
   .weather-widget,
   .container-music,
   #container {
@@ -107,15 +107,24 @@ body {
     margin: 20px auto;
   }
 
-  
-
   .container-pomodoro_timer {
     height: auto;
     min-height: 300px;
   }
   .left_side {
+    margin-top: 55px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    right: 0;
     margin-left: 0;
-    margin-top: 2vw;
+  }
+  .right_side {
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    left: 0;
   }
   .main_container {
     display: flex;

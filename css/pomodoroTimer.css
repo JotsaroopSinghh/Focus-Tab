@@ -82,8 +82,10 @@ input[type="number"] {
   background: rgba(0, 0, 0, 0.418);
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .container-pomodoro_timer {
-    width: 100vw;
+    width: 40vw;
+    height: 40vh;
+    max-width: 300px;
   }
 }
