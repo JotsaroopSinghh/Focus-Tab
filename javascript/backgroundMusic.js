@@ -98,3 +98,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Add to backgroundMusic.js
+
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleButton = document.getElementById('toggle');
+  const navbarPlayButton = document.getElementById('navbar-play-button');
+
+  function updateNavbarPlayButton() {
+    if (window.innerWidth <= 1000) {
+      navbarPlayButton.style.display = 'inline-block';
+      toggleButton.style.display = 'none';
+    } else {
+      navbarPlayButton.style.display = 'none';
+      toggleButton.style.display = 'inline-block';
+    }
+  }
+
+  updateNavbarPlayButton();
+
+  window.addEventListener('resize', updateNavbarPlayButton);
+
+  navbarPlayButton.addEventListener('click', () => {
+    toggleButton.click();
+  });
+});

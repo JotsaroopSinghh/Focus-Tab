@@ -61,3 +61,60 @@ body {
   right: 0px;
   bottom: 0px;
 }
+
+/* Add to main.css */
+
+.navbar {
+  display: none;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .navbar {
+    display: flex;
+  }
+
+  /* .left_side,
+  .right_side, */
+  .weather-widget,
+  .container-music,
+  
+  #container{
+    display: none;
+  }
+#container  {
+  display: none !important; 
+}
+  #todo-list,
+  .container-pomodoro_timer {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  #todo-list {
+    height: auto;
+    min-height: 300px;
+  }
+
+  .container-pomodoro_timer {
+    height: auto;
+    min-height: 300px;
+  }
+}

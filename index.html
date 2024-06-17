@@ -31,6 +31,14 @@
         align-items: center;
       }
     </style>
+    <!-- Add to index.html inside <body> -->
+    <div class="navbar" id="navbar">
+      <div class="navbar-content">
+        <div id="navbar-time"></div>
+        <div id="navbar-temperature"></div>
+        <button id="navbar-play-button">▶</button>
+      </div>
+    </div>
 
     <div class="main_container">
       <div class="left_side">
@@ -142,8 +150,9 @@
       </div>
     </div>
 
+    <!-- Modify the existing inline script in index.html -->
+
     <script>
-      //TIME
       function displayTime() {
         var d = new Date();
         var hour = d.getHours();
@@ -158,11 +167,16 @@
         }
         if (hour < 10) hour = "0" + hour;
         if (min < 10) min = "0" + min;
-        document.getElementById("clock").innerHTML =
-          hour + ":" + min + " " + amOrPm;
+        const timeString = hour + ":" + min + " " + amOrPm;
+        document.getElementById("clock").innerHTML = timeString;
+        if (window.innerWidth <= 1000) {
+          document.getElementById("navbar-time").innerHTML = timeString;
+        } else {
+          document.getElementById("navbar-time").innerHTML = "";
+        }
       }
       setInterval(displayTime, 1000);
-      //Date
+
       function updateDate() {
         const dateInfoDiv = document.getElementById("date-info");
         const now = new Date();
@@ -172,14 +186,24 @@
         const date = now.getDate();
         const day = now.toLocaleString("default", { weekday: "long" });
 
-        dateInfoDiv.innerHTML = `
-                <p>${date} ${month} ${year}</p>
-            `;
+        const dateString = `${date} ${month} ${year}`;
+        dateInfoDiv.innerHTML = `<p>${dateString}</p>`;
+
+        if (window.innerWidth <= 1000) {
+          document.getElementById(
+            "navbar-time"
+          ).innerHTML += `, ${date} ${month} ${year}`;
+        } else {
+          document.getElementById("navbar-time").innerHTML = document
+            .getElementById("navbar-time")
+            .innerHTML.split(",")[0];
+        }
       }
 
       setInterval(updateDate, 1000);
 
       updateDate();
+      displayTime();
 
       //WEATHER
 

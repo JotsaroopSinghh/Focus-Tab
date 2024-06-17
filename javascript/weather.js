@@ -110,3 +110,32 @@ function displayWeather(data) {
 let tasks = localStorage.getItem("tasks")
   ? JSON.parse(localStorage.getItem("tasks"))
   : [];
+
+  // Add to weather.js
+
+function updateNavbarTemperature(data) {
+  const navbarTemperature = document.getElementById('navbar-temperature');
+  if (window.innerWidth <= 1000) {
+    navbarTemperature.innerHTML = `${data.main.temp}°C`;
+  } else {
+    navbarTemperature.innerHTML = '';
+  }
+}
+
+function displayWeather(data) {
+  if (data.cod === 200) {
+    // Existing code...
+
+    // Add this line to call the new function
+    updateNavbarTemperature(data);
+  } else {
+    alert("City not found");
+  }
+}
+
+window.addEventListener('resize', () => {
+  const storedCity = localStorage.getItem('city');
+  if (storedCity) {
+    fetchWeather(storedCity);
+  }
+});
