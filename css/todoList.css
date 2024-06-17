@@ -76,7 +76,7 @@ border: 2px solid #fff;
 
 #tasks {
   overflow: auto;
-  max-height: 22vh;
+  max-height: 21vh;
 }
 ::-webkit-scrollbar {
   width: 10px;
