@@ -120,7 +120,14 @@
             <button onclick="setPreset(25, 5)">25/5</button>
             <button onclick="setPreset(50, 10)">50/10</button>
           </div>
-          <button id="start-stop-btn" onclick="startStopTimer()">Start</button>
+
+          <button
+            class="pomodoro-btns"
+            id="start-stop-btn"
+            onclick="startStopTimer()"
+          >
+            Start
+          </button>
           <button
             id="start-break-btn"
             style="display: none"
@@ -143,7 +150,7 @@
               min="1"
               required
             />
-            <button type="submit">Add Preset</button>
+            <button class="pomodoro-btns" type="submit">Add Preset</button>
           </form>
           <audio id="alarm-audio" src="music/audio.wav"></audio>
         </div>
@@ -207,43 +214,43 @@
 
       //WEATHER
 
-      tasks.forEach((task) => {
-        addTaskToDOM(task);
-      });
+      // tasks.forEach((task) => {
+      //   addTaskToDOM(task);
+      // });
 
-      function addTask() {
-        let taskInput = document.getElementById("taskInput");
-        let taskText = taskInput.value.trim();
-        if (taskText !== "") {
-          let task = { text: taskText, completed: false };
-          tasks.push(task);
-          localStorage.setItem("tasks", JSON.stringify(tasks));
-          addTaskToDOM(task);
-          taskInput.value = "";
-        }
-      }
+      // function addTask() {
+      //   let taskInput = document.getElementById("taskInput");
+      //   let taskText = taskInput.value.trim();
+      //   if (taskText !== "") {
+      //     let task = { text: taskText, completed: false };
+      //     tasks.push(task);
+      //     localStorage.setItem("tasks", JSON.stringify(tasks));
+      //     addTaskToDOM(task);
+      //     taskInput.value = "";
+      //   }
+      // }
 
-      function addTaskToDOM(task) {
-        let tasksList = document.getElementById("tasks");
-        let taskItem = document.createElement("li");
-        taskItem.textContent = task.text;
-        if (task.completed) {
-          taskItem.classList.add("completed");
-        }
-        let deleteButton = document.createElement("button");
-        deleteButton.textContent = "❌";
-        deleteButton.onclick = function () {
-          removeTask(task);
-          tasksList.removeChild(taskItem);
-        };
-        taskItem.appendChild(deleteButton);
-        tasksList.appendChild(taskItem);
-      }
+      // function addTaskToDOM(task) {
+      //   let tasksList = document.getElementById("tasks");
+      //   let taskItem = document.createElement("li");
+      //   taskItem.textContent = task.text;
+      //   if (task.completed) {
+      //     taskItem.classList.add("completed");
+      //   }
+      //   let deleteButton = document.createElement("button");
+      //   deleteButton.textContent = "❌";
+      //   deleteButton.onclick = function () {
+      //     removeTask(task);
+      //     tasksList.removeChild(taskItem);
+      //   };
+      //   taskItem.appendChild(deleteButton);
+      //   tasksList.appendChild(taskItem);
+      // }
 
-      function removeTask(taskToRemove) {
-        tasks = tasks.filter((task) => task !== taskToRemove);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-      }
+      // function removeTask(taskToRemove) {
+      //   tasks = tasks.filter((task) => task !== taskToRemove);
+      //   localStorage.setItem("tasks", JSON.stringify(tasks));
+      // }
     </script>
   </body>
 </html>

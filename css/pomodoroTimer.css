@@ -5,7 +5,7 @@
   text-align: center;
   min-width: 300px;
   width: 22.5vw;
-
+border: 2px solid #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   height: 50vh;
   margin-bottom: 2.5vh;
@@ -50,7 +50,7 @@ input[type="number"] {
   padding: 5px;
   margin-right: 5px;
   border-radius: 5px;
-
+  color: #fff;
   background-color: rgba(0, 0, 0, 0.218);
   border: none;
   padding-top: 10px;
@@ -81,11 +81,51 @@ input[type="number"] {
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.418);
 }
-
+.pomodoro-btns {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border: 2px solid #000;
+}
+.pomodoro-btns:hover {
+  background-color: #000;
+  color: white;
+  border: 2px solid #fff;
+}
 @media (max-width: 1000px) {
   .container-pomodoro_timer {
-    width: 60vw;
+    /* width: 60vw; */
     height: 40vh;
-    min-width: 500px;
+    /* min-width: 500px; */
+    border: 2px solid #fff;
   }
+  .container-pomodoro_timer h1 {
+    font-size: 30px;
+  }
+    .timer {
+      font-size: 40px;
+      
+    }
+    .preset-buttons {
+      font-size: 40px;
+    }
+   .preset-buttons button {
+      font-size: 13px;
+    }
+    .pomodoro-btns {
+      
+      font-size: 12px;
+      border: 2px solid #fff;
+    }
+        ::placeholder {
+          font-weight: 600;
+          color: rgb(155, 155, 155);
+          font-size: 10px;
+        }
+}
+
+@media (max-height: 700px) {
+  .pomodoro-btns {
+      font-size: 8px;
+      border: 2px solid #fff;
+    }
 }

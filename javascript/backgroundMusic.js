@@ -39,9 +39,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (isPlaying) {
       audioElement.pause();
       toggleButton.textContent = "▶";
+      
     } else {
       audioElement.play();
       toggleButton.textContent = "||";
+      
     }
     isPlaying = !isPlaying;
 
@@ -120,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', updateNavbarPlayButton);
 
   navbarPlayButton.addEventListener('click', () => {
+    
     toggleButton.click();
   });
 });

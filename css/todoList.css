@@ -10,6 +10,7 @@
   height: 40vh;
   margin-top: 5vh;
   margin-bottom: 2.5vh;
+border: 2px solid #fff;
 }
 #todo-list ul {
   display: block;
@@ -93,6 +94,22 @@
 @media (max-width: 1000px) {
   #todo-list {
     /* width: 40vw; */
-  width: 500px;
+  /* width: 500px; */
+  border: 2px solid #fff;
   }
+  .todo-head {
+    font-size: 30px;
+  }
+    #todo-list li {
+      font-size: 10px;
+    }
+        #todo-list input[type="text"] {
+          border: 2px solid #fff;
+        }
+         #todo-list button {
+          font-size: 15px;
+         }
+                 #tasks button {
+                  font-size: 10px;
+                 }
 }
