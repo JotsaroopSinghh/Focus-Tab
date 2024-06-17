@@ -95,13 +95,12 @@ body {
   .right_side, */
   .weather-widget,
   .container-music,
-  
-  #container{
+  #container {
     display: none;
   }
-#container  {
-  display: none !important; 
-}
+  #container {
+    display: none !important;
+  }
   #todo-list,
   .container-pomodoro_timer {
     width: 90%;
