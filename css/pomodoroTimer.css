@@ -86,6 +86,6 @@ input[type="number"] {
   .container-pomodoro_timer {
     width: 60vw;
     height: 40vh;
-    min-width: 550px;
+    min-width: 500px;
   }
 }

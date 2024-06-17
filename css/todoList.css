@@ -92,7 +92,7 @@
 
 @media (max-width: 1000px) {
   #todo-list {
-    width: 40vw;
-  max-width: 300px;
+    /* width: 40vw; */
+  width: 500px;
   }
 }
