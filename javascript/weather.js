@@ -71,7 +71,7 @@ function displayWeather(data) {
     } else if (main.includes("snow")) {
       weatherEmoji = "❄️";
     } else {
-      weatherEmoji = "🌤️";
+      weatherEmoji = "🌈";
     }
 
     weatherInfo.innerHTML = `
@@ -107,47 +107,6 @@ function displayWeather(data) {
     alert("City not found");
   }
 }
-  function checkWindowSize() {
-        const closeButton = document.getElementById("close-btn");
-        if (window.innerWidth <= 1000) {
-          widget.style.display = "none";
-          title.style.display = "block";
-          closeButton.style.display = "block";
-        } else {
-          widget.style.display = "block";
-          title.style.display = "none";
-          closeButton.style.display = "none";
-        }
-      }
-
-      function centerWidget() {
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-        const widgetWidth = widget.offsetWidth;
-        const widgetHeight = widget.offsetHeight;
-        const left = (windowWidth - widgetWidth) / 2;
-        const top = (windowHeight - widgetHeight) / 2;
-
-        widget.style.left = `${left}px`;
-        widget.style.top = `${top}px`;
-      }
-
-      window.addEventListener("resize", checkWindowSize);
-      window.addEventListener("load", checkWindowSize);
-
-      title.addEventListener("click", () => {
-        widget.style.display = "block";
-        title.style.display = "none";
-        centerWidget();
-      });
-
-      document.getElementById("close-btn").addEventListener("click", () => {
-        widget.style.display = "none";
-        title.style.display = "block";
-      });
-
-      window.addEventListener("load", centerWidget);
-      window.addEventListener("resize", centerWidget);
 let tasks = localStorage.getItem("tasks")
   ? JSON.parse(localStorage.getItem("tasks"))
   : [];

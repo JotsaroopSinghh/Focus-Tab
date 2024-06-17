@@ -3,7 +3,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
-  
 }
 body {
   background-color: #191919;
@@ -61,11 +60,4 @@ body {
   flex-direction: column;
   right: 0px;
   bottom: 0px;
-}
-
-@media (max-width:1000px) {
-  .left_side {
-    margin-left: 0;
-    
-  }
 }
