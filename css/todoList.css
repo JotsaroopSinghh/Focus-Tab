@@ -89,3 +89,10 @@
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.418);
 }
+
+@media (max-width:1000px) {
+  #todo-list {
+    width: 100vw;
+    margin-left: 0;
+  }
+}
