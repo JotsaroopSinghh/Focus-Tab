@@ -1,4 +1,4 @@
-const apiKey = "5c4f40a3458f8908bee1d717b62fb8cf"; // Replace with your OpenWeatherMap API key
+const apiKey = "5c4f40a3458f8908bee1d717b62fb8cf";
 let intervalId;
 
 document.getElementById("getWeather").addEventListener("click", () => {
@@ -7,7 +7,7 @@ document.getElementById("getWeather").addEventListener("click", () => {
     fetchWeather(city);
     localStorage.setItem("city", city);
     clearInterval(intervalId);
-    intervalId = setInterval(() => fetchWeather(city), 600000); // Update every 10 minutes
+    intervalId = setInterval(() => fetchWeather(city), 600000); 
   }
 });
 
@@ -18,7 +18,7 @@ document.getElementById("autoDetect").addEventListener("click", () => {
       const lon = position.coords.longitude;
       fetchWeatherByCoords(lat, lon);
       clearInterval(intervalId);
-      intervalId = setInterval(() => fetchWeatherByCoords(lat, lon), 600000); // Update every 10 minutes
+      intervalId = setInterval(() => fetchWeatherByCoords(lat, lon), 600000); 
     });
   } else {
     alert("Geolocation is not supported by this browser.");
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const storedCity = localStorage.getItem("city");
   if (storedCity) {
     fetchWeather(storedCity);
-    intervalId = setInterval(() => fetchWeather(storedCity), 600000); // Update every 10 minutes
+    intervalId = setInterval(() => fetchWeather(storedCity), 600000); 
   }
 });
 
