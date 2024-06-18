@@ -95,9 +95,7 @@ input[type="number"] {
 }
 @media (max-width: 1000px) {
   .container-pomodoro_timer {
-    /* width: 60vw; */
     height: 40vh;
-    /* min-width: 500px; */
     border: 2px solid #fff;
   }
   .container-pomodoro_timer h1 {

@@ -93,8 +93,6 @@ border: 2px solid #fff;
 
 @media (max-width: 1000px) {
   #todo-list {
-    /* width: 40vw; */
-  /* width: 500px; */
   border: 2px solid #fff;
   }
   .todo-head {

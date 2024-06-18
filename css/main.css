@@ -62,7 +62,6 @@ body {
   bottom: 0px;
 }
 
-/* Add to main.css */
 
 .navbar {
   display: none;
@@ -103,7 +102,6 @@ body {
   }
   #todo-list,
   .container-pomodoro_timer {
-    /* width: 100%;*/
     width: 80vw !important;
     max-width: 500px;
     margin: 20px auto;
