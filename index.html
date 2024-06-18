@@ -117,22 +117,12 @@
           <h1 id="status">Work Time</h1>
           <div class="timer" id="timer">25:00</div>
           <div class="preset-buttons" id="preset-buttons">
-            <button onclick="setPreset(25, 5)">25/5</button>
-            <button onclick="setPreset(50, 10)">50/10</button>
+            <button id="preset-25-5">25/5</button>
+            <button id="preset-50-10">50/10</button>
           </div>
 
-          <button
-            class="pomodoro-btns"
-            id="start-stop-btn"
-            onclick="startStopTimer()"
-          >
-            Start
-          </button>
-          <button
-            id="start-break-btn"
-            style="display: none"
-            onclick="startBreak()"
-          >
+          <button class="pomodoro-btns" id="start-stop-btn">Start</button>
+          <button id="start-break-btn" style="display: none">
             Start Break
           </button>
           <form id="new-preset-form" onsubmit="addPreset(event)">
@@ -156,7 +146,5 @@
         </div>
       </div>
     </div>
-
-    
   </body>
 </html>

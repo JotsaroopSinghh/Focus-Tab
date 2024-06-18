@@ -14,6 +14,7 @@ function savePresets() {
   const buttons = document.querySelectorAll(".preset-buttons button");
   const presets = Array.from(buttons).map((btn) => btn.textContent);
   localStorage.setItem("presets", JSON.stringify(presets));
+  
 }
 
 function loadPresets() {
@@ -27,6 +28,7 @@ function loadPresets() {
       newButton.onclick = () => setPreset(work, breakTime);
       document.getElementById("preset-buttons").appendChild(newButton);
     });
+    
   }
 }
 
@@ -74,6 +76,7 @@ function addPreset(event) {
   savePresets();
   document.getElementById("work-time").value = "";
   document.getElementById("break-time").value = "";
+  
 }
 
 function startStopTimer() {
@@ -151,7 +154,39 @@ function stopAlarm() {
   alarmAudio.currentTime = 0; 
 }
 
-updateTimerDisplay();
+document.addEventListener('DOMContentLoaded', function() {
+  const preset25Button = document.getElementById('preset-25-5');
+  const preset50Button = document.getElementById('preset-50-10');
+  const startStopButton = document.getElementById('start-stop-btn');
+  const startBreakButton = document.getElementById('start-break-btn');
+  const newPresetForm = document.getElementById('new-preset-form');
+
+  if (preset25Button) {
+    preset25Button.addEventListener('click', function() {
+      setPreset(25, 5);
+    });
+  }
+
+  if (preset50Button) {
+    preset50Button.addEventListener('click', function() {
+      setPreset(50, 10);
+    });
+  }
+
+  if (startStopButton) {
+    startStopButton.addEventListener('click', startStopTimer);
+  }
+
+  if (startBreakButton) {
+    startBreakButton.addEventListener('click', startBreak);
+  }
+
+  if (newPresetForm) { 
+    newPresetForm.addEventListener('submit', addPreset);
+  }
 
 
-
+  loadPresets();
+  loadTimerState();
+  updateTimerDisplay();
+});
