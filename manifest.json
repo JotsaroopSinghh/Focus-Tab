@@ -1,9 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Chrome extension",
+  "name": "Focus Tab",
   "version": "1.0.0",
-  "description": "The Better New Tab",
+  "description": "Your own new tab to help you focus",
   "permissions": ["activeTab", "geolocation"],
+  "icons": {
+    "16": "images/16x16.png",
+
+    "48": "images/48x48.png",
+    "128": "images/128x128.png"
+  },
 
   "chrome_url_overrides": {
     "newtab": "index.html"
