@@ -7,7 +7,7 @@ document.getElementById("getWeather").addEventListener("click", () => {
     fetchWeather(city);
     localStorage.setItem("city", city);
     clearInterval(intervalId);
-    intervalId = setInterval(() => fetchWeather(city), 600000); 
+    intervalId = setInterval(() => fetchWeather(city), 600000);
   }
 });
 
@@ -18,7 +18,7 @@ document.getElementById("autoDetect").addEventListener("click", () => {
       const lon = position.coords.longitude;
       fetchWeatherByCoords(lat, lon);
       clearInterval(intervalId);
-      intervalId = setInterval(() => fetchWeatherByCoords(lat, lon), 600000); 
+      intervalId = setInterval(() => fetchWeatherByCoords(lat, lon), 600000);
     });
   } else {
     alert("Geolocation is not supported by this browser.");
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const storedCity = localStorage.getItem("city");
   if (storedCity) {
     fetchWeather(storedCity);
-    intervalId = setInterval(() => fetchWeather(storedCity), 600000); 
+    intervalId = setInterval(() => fetchWeather(storedCity), 600000);
   }
 });
 
@@ -71,7 +71,7 @@ function displayWeather(data) {
     } else if (main.includes("snow")) {
       weatherEmoji = "❄️";
     } else {
-      weatherEmoji = "🌈";
+      weatherEmoji = "🌤️";
     }
 
     weatherInfo.innerHTML = `
@@ -111,7 +111,7 @@ function displayWeather(data) {
 }
 
 function updateNavbarWeather(data) {
-  const navbarTemperature = document.getElementById('navbar-temperature');
+  const navbarTemperature = document.getElementById("navbar-temperature");
   if (window.innerWidth <= 1000) {
     let weatherEmoji;
     const main = data.weather[0].main.toLowerCase();
@@ -124,17 +124,17 @@ function updateNavbarWeather(data) {
     } else if (main.includes("snow")) {
       weatherEmoji = "❄️";
     } else {
-      weatherEmoji = "🌈";
+      weatherEmoji = "🌤️";
     }
 
     navbarTemperature.innerHTML = `${weatherEmoji} ${data.main.temp}°C`;
   } else {
-    navbarTemperature.innerHTML = '';
+    navbarTemperature.innerHTML = "";
   }
 }
 
-window.addEventListener('resize', () => {
-  const storedCity = localStorage.getItem('city');
+window.addEventListener("resize", () => {
+  const storedCity = localStorage.getItem("city");
   if (storedCity) {
     fetchWeather(storedCity);
   }
