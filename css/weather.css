@@ -24,6 +24,7 @@
 }
 .weather-widget input {
   background-color: rgba(0, 0, 0, 0.418);
+  color: white;
 }
 .weather-widget button {
   border: 2px solid transparent;
