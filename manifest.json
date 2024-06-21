@@ -2,11 +2,10 @@
   "manifest_version": 3,
   "name": "Focus Tab",
   "version": "1.0.0",
-  "description": "Your own new tab to help you focus",
-  "permissions": ["activeTab", "geolocation"],
+  "description": "Your own new tab to help you Focus",
+  "permissions": ["geolocation"],
   "icons": {
     "16": "images/16x16.png",
-
     "48": "images/48x48.png",
     "128": "images/128x128.png"
   },
