@@ -5,7 +5,8 @@
   font-size: 1.25vw;
   width: 50vw;
   position: relative;
-  bottom: 0;
+  bottom: -1.5vh;
+  
 }
 
 @media (max-width:1000px) {
