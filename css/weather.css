@@ -13,6 +13,7 @@
   min-height: 220px;
   border: 2px solid #fff;
   margin-top: 2.5vh;
+  align-items: center;
 }
 .weather-widget input,
 .weather-widget button {
@@ -94,4 +95,14 @@
 }
 .details div .icon {
   font-size: 2.5vw;
+}
+
+#widgetTitle {
+  font-size: 2.5vw;
+  margin-bottom: 1vw;
+  margin-top: 1vw;
+}
+
+@media screen {
+  
 }

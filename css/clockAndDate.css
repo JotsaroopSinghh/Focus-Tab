@@ -1,6 +1,6 @@
 #clock {
   display: flex;
-  margin-top: 2vh;
+  margin-top: 1vh;
   font-size: 4vw;
   font-family: sans-serif;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
