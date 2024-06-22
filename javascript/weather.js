@@ -1,4 +1,4 @@
-const apiKey = "5c4f40a3458f8908bee1d717b62fb8cf";
+const apiKey = "660056f301ec4b51914181204242206 ";
 let intervalId;
 
 document.getElementById("getWeather").addEventListener("click", () => {
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function fetchWeather(city) {
   fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+    `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`
   )
     .then((response) => response.json())
     .then((data) => displayWeather(data))
@@ -44,31 +44,31 @@ function fetchWeather(city) {
 
 function fetchWeatherByCoords(lat, lon) {
   fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+    `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&aqi=no`
   )
     .then((response) => response.json())
     .then((data) => {
       displayWeather(data);
-      localStorage.setItem("city", data.name);
+      localStorage.setItem("city", data.location.name);
     })
     .catch((error) => alert("Error fetching weather data: " + error));
 }
 
 function displayWeather(data) {
-  if (data.cod === 200) {
+  if (data) {
     const weatherInfo = document.getElementById("weatherInfo");
     const widgetTitle = document.getElementById("widgetTitle");
     widgetTitle.style.display = "none";
 
     let weatherEmoji;
-    const main = data.weather[0].main.toLowerCase();
-    if (main.includes("clear")) {
+    const condition = data.current.condition.text.toLowerCase();
+    if (condition.includes("clear")) {
       weatherEmoji = "☀️";
-    } else if (main.includes("clouds")) {
+    } else if (condition.includes("cloud")) {
       weatherEmoji = "☁️";
-    } else if (main.includes("rain")) {
+    } else if (condition.includes("rain")) {
       weatherEmoji = "🌧️";
-    } else if (main.includes("snow")) {
+    } else if (condition.includes("snow")) {
       weatherEmoji = "❄️";
     } else {
       weatherEmoji = "🌤️";
@@ -76,22 +76,22 @@ function displayWeather(data) {
 
     weatherInfo.innerHTML = `
       <div class="city">
-        <h3>${data.name}</h3><span id="editLocation">✏️</span>
+        <h3>${data.location.name}</h3><span id="editLocation">✏️</span>
       </div>
       <div class="weather-emoji">${weatherEmoji}</div>
-      <div class="temperature">${data.main.temp}°C</div>
+      <div class="temperature">${data.current.temp_c}°C</div>
       <div class="details">
         <div>
           <div class="icon">🌡️</div>
-          <p> ${data.main.feels_like}°C</p>
+          <p> ${data.current.feelslike_c}°C</p>
         </div>
         <div>
           <div class="icon">💧</div>
-          <p> ${data.main.humidity}%</p>
+          <p> ${data.current.humidity}%</p>
         </div>
         <div>
           <div class="icon">🌬️</div>
-          <p> ${data.wind.speed} m/s</p>
+          <p> ${data.current.wind_kph} kph</p>
         </div>
       </div>
     `;
@@ -114,20 +114,20 @@ function updateNavbarWeather(data) {
   const navbarTemperature = document.getElementById("navbar-temperature");
   if (window.innerWidth <= 1000) {
     let weatherEmoji;
-    const main = data.weather[0].main.toLowerCase();
-    if (main.includes("clear")) {
+    const condition = data.current.condition.text.toLowerCase();
+    if (condition.includes("clear")) {
       weatherEmoji = "☀️";
-    } else if (main.includes("clouds")) {
+    } else if (condition.includes("cloud")) {
       weatherEmoji = "☁️";
-    } else if (main.includes("rain")) {
+    } else if (condition.includes("rain")) {
       weatherEmoji = "🌧️";
-    } else if (main.includes("snow")) {
+    } else if (condition.includes("snow")) {
       weatherEmoji = "❄️";
     } else {
       weatherEmoji = "🌤️";
     }
 
-    navbarTemperature.innerHTML = `${weatherEmoji} ${data.main.temp}°C`;
+    navbarTemperature.innerHTML = `${weatherEmoji} ${data.current.temp_c}°C`;
   } else {
     navbarTemperature.innerHTML = "";
   }
