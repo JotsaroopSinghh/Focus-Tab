@@ -12,6 +12,7 @@
   color: white;
   min-height: 220px;
   border: 2px solid #fff;
+  margin-top: 2.5vh;
 }
 .weather-widget input,
 .weather-widget button {

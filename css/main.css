@@ -59,9 +59,7 @@ body {
   display: flex;
   flex-direction: column;
   right: 0px;
-  bottom: 0px;
 }
-
 
 .navbar {
   display: none;
@@ -129,5 +127,8 @@ body {
   .main_container {
     display: flex;
     justify-content: center;
+  }
+  .right_side {
+    bottom: 0px;
   }
 }

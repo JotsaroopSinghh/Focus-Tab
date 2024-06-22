@@ -10,7 +10,8 @@
   height: 40vh;
   margin-top: 5vh;
   margin-bottom: 2.5vh;
-border: 2px solid #fff;
+  border: 2px solid #fff;
+  min-height: 220px;
 }
 #todo-list ul {
   display: block;
@@ -19,12 +20,12 @@ border: 2px solid #fff;
   color: black;
 }
 #todo-list li {
-    display: flex;
+  display: flex;
 
-      align-items: center;
-    
-      justify-content: space-between;
-     
+  align-items: center;
+
+  justify-content: space-between;
+
   background-color: rgba(0, 0, 0, 0.418);
   border: none;
   margin-bottom: 5px;
@@ -34,11 +35,10 @@ border: 2px solid #fff;
   color: white;
   border: 2px solid white;
   word-break: break-all;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    position: relative;
-      
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
 }
 
 #todo-list input[type="text"] {
@@ -63,22 +63,18 @@ border: 2px solid #fff;
   border-radius: 12px;
 }
 
-
-
 #tasks button {
-
   box-shadow: none;
   float: right;
   padding: 0;
   margin: 0;
   margin-left: 10px;
- 
-    font-size: 1.25vw;
-    position: absolute;
-  
-     right: 0;
-     background-color: rgb(0, 0, 0);
 
+  font-size: 1.25vw;
+  position: absolute;
+
+  right: 0;
+  background-color: rgb(0, 0, 0);
 }
 .todo-head {
   text-align: center;
@@ -108,21 +104,21 @@ border: 2px solid #fff;
 
 @media (max-width: 1000px) {
   #todo-list {
-  border: 2px solid #fff;
+    border: 2px solid #fff;
   }
   .todo-head {
     font-size: 30px;
   }
-    #todo-list li {
-      font-size: 10px;
-    }
-        #todo-list input[type="text"] {
-          border: 2px solid #fff;
-        }
-         #todo-list button {
-          font-size: 15px;
-         }
-                 #tasks button {
-                  font-size: 10px;
-                 }
+  #todo-list li {
+    font-size: 10px;
+  }
+  #todo-list input[type="text"] {
+    border: 2px solid #fff;
+  }
+  #todo-list button {
+    font-size: 15px;
+  }
+  #tasks button {
+    font-size: 10px;
+  }
 }
