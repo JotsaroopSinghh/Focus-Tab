@@ -11,9 +11,9 @@
   background-color: rgba(0, 0, 0, 0.418);
   text-align: center;
   width: 25vw;
-  min-width: 300px;
+  min-width: 235px;
   height: 25vw;
-  min-height: 300px;
+  min-height: 235px;
   justify-content: center;
   align-items: center;
 }
@@ -32,12 +32,11 @@
   border-radius: 50%;
   text-align: center;
   width: 25vw;
-  min-width: 300px;
+  min-width: 235px;
   height: 25vw;
-  min-height: 300px;
+  min-height: 235px;
   justify-content: center;
   align-items: center;
-  
 }
 
 @media (max-width: 1000px) {
