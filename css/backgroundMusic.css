@@ -11,6 +11,7 @@
   margin-top: 2.5vh;
   border: 2px solid #fff;
   min-height: 275px;
+  overflow: hidden;
 }
 
 .cover-art {
