@@ -10,6 +10,7 @@
   height: 50vh;
   margin-top: 2.5vh;
   border: 2px solid #fff;
+  min-height: 275px;
 }
 
 .cover-art {
@@ -27,14 +28,12 @@
   font-size: 5.5vw;
   color: transparent;
   text-shadow: 0 0 0 #fff;
-  padding-top: 0.5vw ;
- 
+  padding-top: 0.5vw;
 }
 
 .cover-art-text {
   font-size: 1.5vw;
   margin-top: -30px;
- 
 }
 
 .controls {
@@ -107,7 +106,6 @@
   font-weight: 900;
   font-size: 15px;
   padding: 5px 15px 5px 15px;
-
 }
 
 #navbar-play-button:hover {
