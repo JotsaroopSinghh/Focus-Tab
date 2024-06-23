@@ -68,6 +68,8 @@
 .track-list {
   list-style: none;
   padding: 0;
+  overflow: auto;
+  max-height: 100px;
 }
 
 .track-list li {
@@ -111,4 +113,10 @@
 #navbar-play-button:hover {
   color: black;
   background-color: white;
+}
+
+@media (max-height: 650px) {
+  .track-list {
+    max-height: 75px;
+  }
 }
