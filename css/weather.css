@@ -103,6 +103,22 @@
   margin-top: 1vw;
 }
 
-@media screen {
-  
+@media (max-height: 650px) {
+  .temperature {
+    font-size: 30px;
+    margin: 2px 0;
+  }
+    .details div .icon {
+      font-size: 20px;
+    }
+    .details {
+      font-size: 15px;
+    }
+        #widgetTitle {
+          font-size: 20px;
+          
+        }
+      .weather-widget button {
+          font-size: 10px;
+      }
 }

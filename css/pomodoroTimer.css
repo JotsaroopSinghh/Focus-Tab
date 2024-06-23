@@ -128,3 +128,13 @@ input[type="number"] {
     border: 2px solid #fff;
   }
 }
+
+@media (max-height: 650px) {
+.container-pomodoro_timer h1 {
+  font-size: 30px;
+}
+
+.timer {
+  font-size: 20px;
+}
+}
