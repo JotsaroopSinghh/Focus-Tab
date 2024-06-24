@@ -5,7 +5,13 @@
   font-family: sans-serif;
 }
 body {
-  background-color: #191919;
+ 
+  background-size: cover;
+   height: 100vh;
+    
+    
+    background-position: center center;
+  
 }
 .main_container {
   display: flex;

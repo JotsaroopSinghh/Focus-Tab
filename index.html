@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/weather.css" />
     <link rel="stylesheet" href="css/clockAndDate.css" />
     <link rel="stylesheet" href="css/quote.css" />
+    <link rel="stylesheet" href="css/contextMenu.css" />
     <!-- JS FILES -->
     <script src="javascript/pomodoroTimer.js" defer></script>
     <script src="javascript/backgroundMusic.js" defer></script>
@@ -19,12 +20,12 @@
     <script src="javascript/todoList.js" defer></script>
     <script src="javascript/quote.js" defer></script>
     <script src="javascript/timedate.js"></script>
+    <script src="javascript/contextMenu.js" defer></script>
   </head>
   <body>
     <style>
       .container {
         position: absolute;
-
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -144,5 +145,16 @@
         </div>
       </div>
     </div>
+
+    <div id="contextMenu" class="context-menu">
+      <div id="changeBackground" class="menu-item">Change Background</div>
+    </div>
+    <div id="backgroundOptions" class="background-options">
+      <div id="solidColor" class="option">Solid Color</div>
+      <div id="gradientColor" class="option">Gradient</div>
+      <div id="yourChoice" class="option">Your Choice</div>
+    </div>
+    <div id="colorBoxes" class="color-boxes"></div>
+    <input type="file" id="fileInput" style="display: none" />
   </body>
 </html>

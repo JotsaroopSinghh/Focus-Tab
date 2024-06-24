@@ -100,7 +100,7 @@ input[type="number"] {
   .container-pomodoro_timer {
     height: 40vh;
     border: 2px solid #fff;
-    background-color: #100c0c;
+    background-color: rgba(0, 0, 0, 0.418);
   }
   .container-pomodoro_timer h1 {
     font-size: 30px;
