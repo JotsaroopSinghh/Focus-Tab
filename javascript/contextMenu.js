@@ -53,7 +53,7 @@ function showColorBoxes(type, top, left) {
     const colorBoxes = document.getElementById('colorBoxes');
     colorBoxes.innerHTML = '';
     const colors = type === 'solid'
-        ? ['#FF6F61', '#191919', '#FF69B4', '#25223F', '#32CD32', '#00CED1', '#1E90FF', '#9370DB']
+        ? ['#FF6F61', '#191919', '#FF69B4', '#25223F', '#000', '#00CED1', '#1E90FF', '#9370DB']
         : ['linear-gradient(to right, #ff7e5f, #feb47b)', 'linear-gradient(to right, #43cea2, #185a9d)', 'linear-gradient(to right, #4568dc, #b06ab3)', 'linear-gradient(to right, #ff5f6d, #ffc371)', 'linear-gradient(to right, #00c6ff, #0072ff)', 'linear-gradient(to right, #f77062, #fe5196)', 'linear-gradient(to right, #00c9ff, #92fe9d)', 'linear-gradient(to right, #fc00ff, #00dbde)'];
     colors.forEach(color => {
         const div = document.createElement('div');
