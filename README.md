@@ -23,7 +23,7 @@ We hope it will help improve your productivity even by a little bit.
 2) Search for <strong>"Focus Tab"</strong>.
 3) Click the <strong>"Add button"</strong>
 
-Alternatively
+Alternatively, install it from the following link
 <a href="https://chromewebstore.google.com/detail/focus-tab/leiofepjjglilgnegnnppaglgdnpieen" class="button">Install</a>
 
 
