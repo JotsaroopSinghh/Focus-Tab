@@ -1,5 +1,5 @@
 <h1>Focus Tab </h1>
-<h3>Developed by Jotsaroop and Manrai</h3>
+<h4>Developed by Jotsaroop and Manrai</h4>
 
 <h2>Overview</h2>
 <strong>Focus Tab</strong> is a chrome extension aimed at boosting productivity by bringing multiple different useful features like pomodoro-timer, to-do list, background music and many more easy accessible on your New Tab Screen. 
@@ -24,7 +24,7 @@ We hope it will help improve your productivity even by a little bit.
 3) Click the <strong>"Add button"</strong>
 
 Alternatively, install it from the following link
-<a href="https://chromewebstore.google.com/detail/focus-tab/leiofepjjglilgnegnnppaglgdnpieen" class="button">Install</a>
+<a href="https://chromewebstore.google.com/detail/focus-tab/leiofepjjglilgnegnnppaglgdnpieen" class="button big">Install</a>
 
 
 
