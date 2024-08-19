@@ -1,4 +1,4 @@
-const apiKey = "660056f301ec4b51914181204242206 ";
+const apiKey = "b2555fafa1b34159865132010240908 ";
 let intervalId;
 
 document.getElementById("getWeather").addEventListener("click", () => {
