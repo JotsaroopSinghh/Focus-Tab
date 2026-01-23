@@ -1,46 +1,51 @@
-#clock {
-  display: flex;
-  margin-top: 1vh;
-  font-size: 4vw;
-  font-family: sans-serif;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
-  color: #fff;
-  border: solid 5px #fff;
-  border-radius: 50%;
-  padding: 130px 0px;
-  background-color: rgba(0, 0, 0, 0.418);
-  text-align: center;
-  width: 25vw;
-  min-width: 235px;
-  height: 25vw;
-  min-height: 235px;
-  justify-content: center;
-  align-items: center;
+
+/* Time & Date widget */
+#container{
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-start;
 }
 
-.date-container {
-  display: flex;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.418);
-  margin-top: -100px;
-  position: relative;
-  font-size: 2.75vw;
-  border: solid 5px #fff;
-  border-radius: 50%;
-  padding: 130px 45px;
-  border-radius: 50%;
-  text-align: center;
-  width: 25vw;
-  min-width: 235px;
-  height: 25vw;
-  min-height: 235px;
-  justify-content: center;
-  align-items: center;
+#clock{
+  font-size: 48px !important;
+  font-weight: 900 !important;
+  letter-spacing: 1px;
+  line-height: 1;
 }
 
-@media (max-width: 1000px) {
-  .date-container {
-    display: none;
-  }
+.date-container{
+  margin-top: 10px;
+  color: rgba(234,240,255,.72);
+  font-size: 14px;
+}
+
+
+/* === Focus Tab polish: Time & Date widget === */
+#container{
+  width: 100% !important;
+  display:flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-top: 10px !important;
+}
+#clock{
+  font-size: 56px !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 !important;
+}
+.date-container{
+  width: 100% !important;
+  display:flex !important;
+  justify-content: center !important;
+  padding-bottom: 6px !important;
+}
+#date-info p{
+  margin: 0 !important;
+  color: var(--muted) !important;
 }

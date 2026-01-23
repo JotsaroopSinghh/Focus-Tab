@@ -125,3 +125,9 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleButton.click();
   });
 });
+
+/* FT rebind hook */
+window.__ftReinitHooks = window.__ftReinitHooks || [];
+window.__ftReinitHooks.push(function __ft_bindMusic(){
+  // Music script typically binds on load; this exists so dashboard can call it after widget re-render.
+});

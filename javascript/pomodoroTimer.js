@@ -190,3 +190,10 @@ document.addEventListener('DOMContentLoaded', function() {
   loadTimerState();
   updateTimerDisplay();
 });
+
+/* FT rebind hook */
+window.__ftReinitHooks = window.__ftReinitHooks || [];
+window.__ftReinitHooks.push(function __ft_bindPomodoro(){
+  const startBtn = document.querySelector("#pomodoroTimer button, #pomodoroTimer #startBtn, #pomodoroTimer #startTimerBtn");
+  if (startBtn && startBtn.dataset.ftBound !== "1") startBtn.dataset.ftBound = "1";
+});

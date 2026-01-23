@@ -1,160 +1,227 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Tab</title>
-    <!-- CSS FILES -->
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/todoList.css" />
-    <link rel="stylesheet" href="css/pomodoroTimer.css" />
-    <link rel="stylesheet" href="css/backgroundMusic.css" />
-    <link rel="stylesheet" href="css/weather.css" />
-    <link rel="stylesheet" href="css/clockAndDate.css" />
-    <link rel="stylesheet" href="css/quote.css" />
-    <link rel="stylesheet" href="css/contextMenu.css" />
-    <!-- JS FILES -->
-    <script src="javascript/pomodoroTimer.js" defer></script>
-    <script src="javascript/backgroundMusic.js" defer></script>
-    <script src="javascript/weather.js" defer></script>
-    <script src="javascript/todoList.js" defer></script>
-    <script src="javascript/quote.js" defer></script>
-    <script src="javascript/timedate.js"></script>
-    <script src="javascript/contextMenu.js" defer></script>
-  </head>
-  <body>
-    <style>
-      .container {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-    </style>
-    <div class="navbar" id="navbar">
-      <div class="navbar-content">
-        <div id="navbar-time"></div>
-        <div id="navbar-temperature"></div>
-        <button id="navbar-play-button">▶</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Tab</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/widgets.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <div class="brand-name">Focus</div>
     </div>
 
-    <div class="main_container">
-      <div class="left_side">
-        <div class="container-music">
-          <div class="cover-art music-emoji" id="cover-art"><p>🎵</p></div>
-          <div class="cover-art-text">Choose a track to play</div>
-          <div class="controls">
-            <button id="toggle" disabled>▶</button>
+    <form class="search" id="searchForm" autocomplete="off">
+      <input id="searchInput" class="search-input" type="search" placeholder="Search Google…" />
+      <button class="search-btn" type="submit" aria-label="Search">↵</button>
+    </form>
+
+    <div class="top-actions">
+      <button class="icon-btn" id="openSettings" type="button" title="Add / customize">+</button>
+    </div>
+  </header>
+
+  <div class="subbar">
+    <div class="focus-line">
+      <span class="focus-label">Today’s focus</span>
+      <input id="focusInput" class="focus-input" type="text" maxlength="80" placeholder="Type one thing you want to finish…" />
+      <button id="focusClear" class="focus-clear" type="button" aria-label="Clear focus">✕</button>
+    </div>
+    <div class="quick-links-row"><div class="quick-links" id="quickLinks" aria-label="Quick links"></div><div class="streak-chip" id="streakChip" title="Pomodoro work streak"></div></div>
+  </div>
+
+  <main class="main">
+    <div id="emptyState" class="empty-state" hidden>
+      <div class="empty-title">Start clean.</div>
+      <div class="empty-sub">Add only what you want — you can reorder anytime.</div>
+      <button class="primary-btn" id="emptyAddBtn" type="button">Add widgets</button>
+    </div>
+
+    <div id="widgetGrid" class="widget-grid"></div>
+
+    <!-- Widget templates (cloned into grid) -->
+    <template id="widgetTemplates">
+
+      <section class="widget-card" data-widget="clock" data-title="Time & Date">
+        <div class="widget-header">
+          <div class="widget-title">Time & Date</div>
+          <div class="header-actions">
+            <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
           </div>
-          <ul class="track-list">
-            <li
-              data-audio="music/bustlingCafe.mp3"
-              data-cover="images/cafe2.jpg"
-            >
-              Bustling Cafe
-            </li>
-            <li
-              data-audio="music/rainyVibes.mp3"
-              data-cover="images/rain2.jpg"
-              class="rain-image"
-            >
-              Rainy Vibes
-            </li>
-            <li data-audio="music/LofiSounds.mp3" data-cover="images/lofi2.jpg">
-              Lofi Music
-            </li>
-          </ul>
-          <div id="warning" class="warning" style="display: none">
-            Please select a track to start playing.
-          </div>
-          <audio id="audio" loop></audio>
         </div>
-        <!-- todo list -->
-        <div id="todo-list">
-          <h2 class="todo-head">TO-DO LIST</h2>
-          <div class="input_text">
-            <input type="text" id="taskInput" placeholder="Enter task..." />
-            <button onclick="addTask()">Add</button>
+        <div class="widget-body">
+          <div class="w-clock">
+            <div class="w-clock-time" id="clockTime">--:--</div>
+            <div class="w-clock-date" id="clockDate">—</div>
           </div>
-          <ul id="tasks"></ul>
         </div>
+      </section>
+
+      <section class="widget-card" data-widget="todo" data-title="To‑Do">
+  <div class="widget-header">
+    <div class="widget-title">To‑Do</div>
+    <div class="header-actions">
+      <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
+    </div>
+  </div>
+  <div class="widget-body">
+    <form class="w-todo-input" data-role="todoForm">
+      <input class="w-input" data-role="todoInput" type="text" placeholder="Add a task…" />
+      <button class="w-btn w-btn-primary" type="submit">Add</button>
+    </form>
+
+    <ul class="w-todo-list" data-role="todoList"></ul>
+
+    <div class="w-todo-footer">
+      <button class="w-btn w-btn-ghost" type="button" data-role="todoClear">Clear done</button>
+      <div class="w-todo-count" data-role="todoCount">0 left</div>
+    </div>
+  </div>
+</section>
+
+      <section class="widget-card" data-widget="weather" data-title="Weather">
+  <div class="widget-header">
+    <div class="widget-title">Weather</div>
+    <div class="header-actions">
+      <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
+    </div>
+  </div>
+  <div class="widget-body">
+    <form class="w-weather-top" data-role="weatherForm">
+      <input class="w-input" data-role="weatherCity" type="text" placeholder="Search city (e.g., Edmonton)" />
+      <button class="w-btn w-btn-primary" type="submit">Get</button>
+    </form>
+
+    <button class="w-weather-auto" type="button" data-role="weatherAuto">Use my location</button>
+
+    <div class="w-weather-card" data-role="weatherCard">
+      <div class="w-weather-topline">
+        <div class="w-weather-loc" data-role="weatherLoc">—</div>
+        <div class="w-weather-chip" data-role="weatherDesc">—</div>
       </div>
 
-      <div class="container">
-        <!--TIME-->
-        <div id="container">
-          <p id="clock"></p>
-        </div>
-        <!--DATE-->
-        <div class="date-container">
-          <div id="date-info">
-            <p>Loading...</p>
-          </div>
-        </div>
-        <div class="quote">
-          <p id="quote-text"></p>
-          <p id="quote-author"></p>
-        </div>
-      </div>
-
-      <!--QUOTES-->
-
-      <div class="right_side">
-        <!-- background music -->
-        <div class="weather-widget">
-          <h2 id="widgetTitle">Weather</h2>
-          <div class="location-input">
-            <input type="text" id="city" placeholder="Enter city" />
-            <button id="getWeather">Get Weather</button>
-            <button id="autoDetect">Auto Detect Location</button>
-          </div>
-          <div class="weather-info" id="weatherInfo"></div>
-        </div>
-        <!-- pomodoro timer -->
-        <div class="container-pomodoro_timer">
-          <h1 id="status">Work Time</h1>
-          <div class="timer" id="timer">25:00</div>
-          <div class="preset-buttons" id="preset-buttons">
-            <button id="preset-25-5">25/5</button>
-            <button id="preset-50-10">50/10</button>
-          </div>
-
-          <button class="pomodoro-btns" id="start-stop-btn">Start</button>
-          <button id="start-break-btn" style="display: none">
-            Start Break
-          </button>
-          <form id="new-preset-form" onsubmit="addPreset(event)">
-            <input
-              type="number"
-              id="work-time"
-              placeholder="Work"
-              min="1"
-              required
-            />
-            <input
-              type="number"
-              id="break-time"
-              placeholder="Break"
-              min="1"
-              required
-            />
-            <button class="pomodoro-btns" type="submit">Add Preset</button>
-          </form>
-          <audio id="alarm-audio" src="music/audio.wav"></audio>
+      <div class="w-weather-row">
+        <div class="w-weather-icon" aria-hidden="true" data-role="weatherIcon">☀️</div>
+        <div class="w-weather-big" data-role="weatherTemp">--°</div>
+        <div class="w-weather-mini">
+          <span>H: <b data-role="weatherHigh">--</b>°</span>
+          <span>L: <b data-role="weatherLow">--</b>°</span>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div id="contextMenu" class="context-menu">
-      <div id="changeBackground" class="menu-item">Change Background</div>
+      <section class="widget-card" data-widget="music" data-title="Focus Sounds">
+        <div class="widget-header">
+          <div class="widget-title">Focus Sounds</div>
+          <div class="header-actions">
+            <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
+          </div>
+        </div>
+        <div class="widget-body">
+          <div class="w-sound">
+            <div class="w-sound-title">Ambient noise for deep work</div>
+            <div class="w-sound-controls">
+              <button class="w-btn w-btn-primary" type="button" data-role="soundToggle">Play</button>
+              <select class="w-select" data-role="soundType">
+                <option value="brown">Brown noise</option>
+                <option value="pink">Pink noise</option>
+                <option value="white">White noise</option>
+              </select>
+            </div>
+            <div class="w-sound-vol">
+              <div class="w-sound-vol-label">Volume</div>
+              <input class="w-range" data-role="soundVol" type="range" min="0" max="100" value="35" />
+            </div>
+            <div class="w-sound-tip">Tip: brown noise is best for focus.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="widget-card" data-widget="pomodoro" data-title="Pomodoro">
+  <div class="widget-header">
+    <div class="widget-title">Pomodoro</div>
+    <div class="header-actions">
+      <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
     </div>
-    <div id="backgroundOptions" class="background-options">
-      <div id="solidColor" class="option">Solid Color</div>
-      <div id="gradientColor" class="option">Gradient</div>
-      <div id="yourChoice" class="option">Upload</div>
+  </div>
+  <div class="widget-body">
+    <div class="w-pomo">
+      <div class="w-pomo-mode" data-role="pomoMode">Work</div>
+      <div class="w-pomo-time" data-role="pomoTime">25:00</div>
+
+      <div class="w-pomo-prompt" data-role="pomoPrompt" hidden>
+        <div class="w-pomo-prompt-text" data-role="pomoPromptText">Session complete.</div>
+        <button class="w-btn w-btn-primary" type="button" data-role="pomoPromptStart">Start</button>
+      </div>
+
+      <div class="w-pomo-presets">
+        <button class="w-chip" type="button" data-role="pomoPreset" data-work="25" data-break="5">25 / 5</button>
+        <button class="w-chip" type="button" data-role="pomoPreset" data-work="50" data-break="10">50 / 10</button>
+        <button class="w-chip" type="button" data-role="pomoPreset" data-work="90" data-break="15">90 / 15</button>
+      </div>
+
+      <div class="w-pomo-actions">
+        <button class="w-btn w-btn-primary" type="button" data-role="pomoStart">Start</button>
+        <button class="w-btn" type="button" data-role="pomoReset">Reset</button>
+      </div>
     </div>
-    <div id="colorBoxes" class="color-boxes"></div>
-    <input type="file" id="fileInput" style="display: none" />
-  </body>
+  </div>
+</section>
+
+      <section class="widget-card" data-widget="quote" data-title="Daily Quote">
+        <div class="widget-header">
+          <div class="widget-title">Daily Quote</div>
+          <div class="header-actions">
+            <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
+          </div>
+        </div>
+        <div class="widget-body">
+          <div class="w-quote">
+            <div class="w-quote-text" data-role="quoteText">Loading quote…</div>
+            <div class="w-quote-author" data-role="quoteAuthor"></div>
+          </div>
+        </div>
+      </section>
+
+    </template>
+  </main>
+
+  <!-- Settings modal -->
+  <div class="modal-backdrop" id="settingsBackdrop" style="display:none">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Widgets">
+      <div class="modal-header">
+        <div class="modal-title">Customize</div>
+        <button class="icon-btn" id="closeSettings" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="section-title">Appearance</div>
+        <div class="section-sub">Choose a light or dark look.</div>
+        <div class="theme-chooser" role="group" aria-label="Theme">
+          <button class="theme-btn" type="button" data-role="themeLight">Light</button>
+          <button class="theme-btn" type="button" data-role="themeDark">Dark</button>
+        </div>
+
+        <div class="widget-picker" id="widgetPicker"></div>
+
+        <div class="section-title">Quick Links</div>
+        <div class="section-sub">Edit what shows under the search bar.</div>
+        <div class="links-editor" id="linksEditor"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="ghost-btn" id="resetLayoutBtn" type="button">Reset</button>
+        <button class="primary-btn" id="doneBtn" type="button">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="javascript/dashboard.js"></script>
+  <script src="javascript/widgets.js"></script>
+</body>
 </html>

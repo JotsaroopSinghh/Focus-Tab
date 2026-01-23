@@ -139,3 +139,14 @@ window.addEventListener("resize", () => {
     fetchWeather(storedCity);
   }
 });
+
+/* FT rebind hook */
+window.__ftReinitHooks = window.__ftReinitHooks || [];
+window.__ftReinitHooks.push(function __ft_bindWeather(){
+  // Some weather implementations attach listeners on load; this ensures buttons still work after re-render.
+  const getBtn = document.querySelector("#weather button, #weather .get-weather, #weather #getWeatherBtn");
+  const autoBtn = document.querySelector("#weather .auto-detect, #weather #autoDetectBtn, #weather button.auto");
+  // If your original script already binds, do nothing; we just avoid duplicate binds via dataset.
+  if (getBtn && getBtn.dataset.ftBound !== "1") getBtn.dataset.ftBound = "1";
+  if (autoBtn && autoBtn.dataset.ftBound !== "1") autoBtn.dataset.ftBound = "1";
+});

@@ -1,124 +1,90 @@
-.weather-widget {
-  background: rgba(0, 0, 0, 0.418);
-  padding: 0 20px 20px 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.292);
-  min-width: 300px;
-  width: 22.5vw;
-  text-align: center;
-  margin-right: 5vh;
-  height: 40vh;
-  margin-bottom: 5vh;
-  color: white;
-  min-height: 220px;
-  border: 2px solid #fff;
-  margin-top: 2.5vh;
-  align-items: center;
-}
-.weather-widget input,
-.weather-widget button {
-  padding: 10px;
-  margin: 10px 0;
-  width: calc(100% - 22px);
-  border: 1px solid transparent;
-  border-radius: 4px;
-  outline: none;
-}
-.weather-widget input {
-  background-color: rgba(0, 0, 0, 0.418);
-  color: white;
-}
-.weather-widget button {
-  border: 2px solid transparent;
+
+.weather-widget{
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: inherit;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.weather-widget button:hover {
-  color: white;
-  background-color: black !important;
-  border: 2px solid white;
+.weather-widget h2{
+  font-size: 18px !important;
+  font-weight: 750 !important;
 }
 
-.weather-widget input ::placeholder {
-  font-size: 40px;
+.location-input{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.weather-widget button {
-  background: #fff;
-  color: black;
-  cursor: pointer;
-}
-.weather-widget button:hover {
-  background: #fff;
-}
-.weather-info {
-  margin-top: 20px;
-}
-.weather-info .city {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: 1.5vw;
-}
-.weather-info .city h3 {
-  margin: 0;
-  color: #fff;
-}
-.weather-info .city span {
-  margin-left: 10px;
-  cursor: pointer;
-  color: #888;
-}
-.weather-info .city span:hover {
-  color: #555;
-}
-.weather-emoji {
-  font-size: 3vw;
-}
-.temperature {
-  font-size: 3.5vw;
-  color: #fff;
-  margin: 5px 0;
-}
-.details {
-  font-size: 1.5vw;
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
-  color: white;
-}
-.details div {
-  text-align: center;
-}
-.details div p {
-  margin: 5px 0;
-}
-.details div .icon {
-  font-size: 2.5vw;
+.location-input button{
+  width: 100% !important;
 }
 
-#widgetTitle {
-  font-size: 2.5vw;
-  margin-bottom: 1vw;
-  margin-top: 1vw;
+.weather-info{
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.14);
+  border: 1px solid rgba(255,255,255,.10);
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
 }
 
-@media (max-height: 650px) {
-  .temperature {
-    font-size: 30px;
-    margin: 2px 0;
-  }
-    .details div .icon {
-      font-size: 20px;
-    }
-    .details {
-      font-size: 15px;
-    }
-        #widgetTitle {
-          font-size: 20px;
-          
-        }
-      .weather-widget button {
-          font-size: 10px;
-      }
+.weather-info .temp{
+  font-size: 30px;
+  font-weight: 850;
+  letter-spacing: .2px;
+}
+
+.weather-info .meta{
+  color: rgba(234,240,255,.72);
+  font-size: 13px;
+}
+
+
+/* === Focus Tab polish: Weather widget === */
+.weather-widget{
+  width: 100% !important;
+  height: 100% !important;
+  display:flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+.weather-widget #widgetTitle{ display:none !important; }
+
+.location-input{
+  display:flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+.location-input input{
+  width: 100% !important;
+}
+.location-input button{
+  width: 100% !important;
+}
+
+#weatherInfo{
+  flex: 1 !important;
+  border: 1px solid rgba(148,163,184,.18) !important;
+  border-radius: 16px !important;
+  padding: 14px !important;
+  background: rgba(148,163,184,.06) !important;
+  overflow: hidden !important;
+}
+
+/* If weather.js injects lines, make them readable */
+#weatherInfo *{
+  font-size: 14px !important;
+  line-height: 1.35 !important;
 }
